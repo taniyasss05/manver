@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MANVER — Панель управления сайтом</title>
+  
+  <!-- Google Fonts: Golos Text & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Автономные стили Tailwind CSS и пользовательские стили -->
+  <link rel="stylesheet" href="css/tailwind.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Lucide Icons -->
+  <script src="js/lucide.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f8fafc;
+    }
+    .heading-font {
+      font-family: 'Golos Text', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .drop-zone.dragover {
+      border-color: #15803d;
+      background-color: #f0fdf4;
+    }
+    .toast-enter {
+      transform: translateY(100%);
+      opacity: 0;
+      transition: all 0.25s ease-out;
+    }
+    .toast-show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="text-stone-800 antialiased min-h-screen flex flex-col">
+
+  <!-- ============================================================ -->
+  <!-- ОКНО ВХОДА (LOGIN MODAL) — ЕСЛИ НЕ АВТОРИЗОВАН -->
+  <!-- ============================================================ -->
+  <div id="loginOverlay" class="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/80 backdrop-blur-sm p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl border border-stone-100 text-center relative animate-fade-in">
+      
+      <div class="inline-flex items-center justify-center p-3 bg-emerald-50 rounded-2xl mb-4 border border-emerald-100">
+        <img src="assets/images/manver_official_logo.png" alt="MANVER" class="h-10 w-auto">
+      </div>
+
+      <h2 class="heading-font text-2xl font-bold text-stone-950 mb-1">Панель управления</h2>
+      <p class="text-xs text-stone-500 mb-6">Введите пароль администратора для доступа к сайту</p>
+
+      <form id="loginForm" class="space-y-4 text-left">
+        <div>
+          <label class="block text-xs font-bold text-stone-700 mb-1.5">Пароль администратора</label>
+          <div class="relative">
+            <input type="password" id="loginPassword" required autofocus placeholder="Введите пароль"
+                   class="w-full bg-stone-50 border border-stone-300 rounded-xl px-4 py-3 text-sm text-stone-900 focus:outline-none focus:border-emerald-800 focus:bg-white transition">
+            <button type="button" onclick="togglePasswordVisibility('loginPassword')" class="absolute right-3 top-3.5 text-stone-400 hover:text-stone-700">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <div id="loginError" class="text-red-600 text-xs font-semibold mt-1.5 hidden"></div>
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-[#15432A] hover:bg-[#0F3B25] text-white font-bold text-sm shadow-md hover:shadow transition flex items-center justify-center gap-2">
+          <span>Войти в систему</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+
+        <p class="text-[11px] text-center text-stone-400 pt-2">
+          Пароль по умолчанию: <code class="bg-stone-100 px-1.5 py-0.5 rounded text-stone-700 font-mono">admin</code>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- ОСНОВНОЙ ИНТЕРФЕЙС АДМИНИСТРАТОРА -->
+  <!-- ============================================================ -->
+  <div id="adminApp" class="flex-1 flex flex-col">
+    
+    <!-- ВЕРХНЯЯ ПАНЕЛЬ (HEADER) -->
+    <header class="bg-white border-b border-stone-200 sticky top-0 z-30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+        
+        <!-- Логотип + Название -->
+        <div class="flex items-center gap-3">
+          <a href="/" target="_blank" title="Перейти на сайт" class="flex items-center gap-2">
+            <img src="assets/images/manver_official_logo.png" alt="MANVER" class="h-9 w-auto">
+          </a>
+          <span class="text-xs bg-emerald-100 text-emerald-900 font-bold px-2.5 py-1 rounded-lg">
+            Управление сайтом
+          </span>
+        </div>
+
+        <!-- Навигационные вкладки (Десктоп) -->
+        <nav class="hidden md:flex items-center gap-1 bg-stone-100 p-1 rounded-xl">
+          <button onclick="switchTab('products')" id="tabBtn-products" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-white text-stone-900 shadow-xs">
+            <i data-lucide="grid" class="w-4 h-4 text-emerald-800"></i>
+            <span>Каталог товаров</span>
+            <span id="productsCounterBadge" class="bg-stone-200 text-stone-700 px-1.5 py-0.2 rounded-full text-[10px]">20</span>
+          </button>
+          <button onclick="switchTab('content')" id="tabBtn-content" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2 text-stone-600 hover:text-stone-900">
+            <i data-lucide="file-text" class="w-4 h-4 text-stone-500"></i>
+            <span>Контакты и тексты</span>
+          </button>
+          <button onclick="switchTab('leads')" id="tabBtn-leads" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2 text-stone-600 hover:text-stone-900">
+            <i data-lucide="inbox" class="w-4 h-4 text-stone-500"></i>
+            <span>Заявки</span>
+            <span id="leadsNewCountBadge" class="bg-emerald-700 text-white px-1.5 py-0.2 rounded-full text-[10px] hidden">0</span>
+          </button>
+          <button onclick="switchTab('security')" id="tabBtn-security" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2 text-stone-600 hover:text-stone-900">
+            <i data-lucide="shield-check" class="w-4 h-4 text-stone-500"></i>
+            <span>Безопасность</span>
+          </button>
+        </nav>
+
+        <!-- Правая часть: Переход на сайт и Выход -->
+        <div class="flex items-center gap-3">
+          <a href="/" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-stone-200 hover:border-stone-300 text-xs font-semibold text-stone-700 bg-stone-50 hover:bg-white transition">
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            <span>Открыть сайт</span>
+          </a>
+          <button onclick="logoutAdmin()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-100 hover:bg-red-50 text-stone-600 hover:text-red-700 text-xs font-semibold transition" title="Выйти">
+            <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+            <span class="hidden sm:inline">Выйти</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Мобильные табы -->
+      <div class="flex md:hidden border-t border-stone-200 bg-stone-50 px-2 py-1.5 overflow-x-auto gap-1">
+        <button onclick="switchTab('products')" id="mobTabBtn-products" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap bg-white text-stone-900 shadow-xs">Каталог</button>
+        <button onclick="switchTab('content')" id="mobTabBtn-content" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap text-stone-600">Контакты</button>
+        <button onclick="switchTab('leads')" id="mobTabBtn-leads" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap text-stone-600">Заявки</button>
+        <button onclick="switchTab('security')" id="mobTabBtn-security" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap text-stone-600">Пароль</button>
+      </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕЙНЕР -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      
+      <!-- ============================================================ -->
+      <!-- ВКЛАДКА 1: КАТАЛОГ ТОВАРОВ (PRODUCTS) -->
+      <!-- ============================================================ -->
+      <section id="tab-products" class="space-y-6">
+        
+        <!-- Верхняя плашка управления каталогом -->
+        <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 class="heading-font text-xl font-extrabold text-stone-950">Каталог продукции (20 позиций)</h1>
+            <p class="text-xs text-stone-500 mt-0.5">Редактируйте цены за м², наличие размеров, тексты и загружайте фотографии сетей</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3">
+            <button onclick="saveProducts()" class="px-4 py-2.5 rounded-xl bg-[#15432A] hover:bg-[#0F3B25] text-white text-xs font-bold shadow-md hover:shadow transition flex items-center gap-2 active:scale-98">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-300"></i>
+              <span>Сохранить изменения каталога</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Фильтр по категориям и поиск -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div class="flex flex-wrap items-center gap-1.5 w-full sm:w-auto">
+            <button onclick="filterCatalog('all', this)" class="prod-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-900 text-white transition">Все (20)</button>
+            <button onclick="filterCatalog('forest', this)" class="prod-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 transition">Лес и хвоя</button>
+            <button onclick="filterCatalog('tactical', this)" class="prod-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 transition">Тактические / Камо</button>
+            <button onclick="filterCatalog('steppe', this)" class="prod-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 transition">Степь и песок</button>
+            <button onclick="filterCatalog('winter', this)" class="prod-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 transition">Зимние</button>
+            <button onclick="filterCatalog('base', this)" class="prod-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 transition">Основы</button>
+          </div>
+
+          <div class="w-full sm:w-64 relative">
+            <i data-lucide="search" class="w-4 h-4 text-stone-400 absolute left-3 top-2.5"></i>
+            <input type="text" id="productSearchInput" oninput="onSearchProducts(this.value)" placeholder="Поиск по названию..."
+                   class="w-full pl-9 pr-3 py-2 bg-white border border-stone-200 rounded-xl text-xs text-stone-800 focus:outline-none focus:border-emerald-800">
+          </div>
+        </div>
+
+        <!-- Сетка карточек товаров -->
+        <div id="productsAdminList" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Генерируется из JavaScript -->
+        </div>
+
+        <!-- Нижняя плавающая кнопка сохранения -->
+        <div class="sticky bottom-4 z-20 flex justify-end">
+          <button onclick="saveProducts()" class="px-6 py-3 rounded-2xl bg-[#15432A] hover:bg-[#0F3B25] text-white text-sm font-bold shadow-xl flex items-center gap-2.5 transition active:scale-98">
+            <i data-lucide="save" class="w-4 h-4 text-emerald-300"></i>
+            <span>Сохранить изменения каталога</span>
+          </button>
+        </div>
+
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- ВКЛАДКА 2: КОНТАКТЫ И ТЕКСТЫ (CONTENT) -->
+      <!-- ============================================================ -->
+      <section id="tab-content" class="space-y-6 hidden">
+        
+        <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-xs flex items-center justify-between">
+          <div>
+            <h1 class="heading-font text-xl font-extrabold text-stone-950">Контакты и тексты на сайте</h1>
+            <p class="text-xs text-stone-500 mt-0.5">Изменение контактных данных, мессенджера Telegram и главного заголовка</p>
+          </div>
+          <button onclick="saveContent()" class="px-5 py-2.5 rounded-xl bg-[#15432A] hover:bg-[#0F3B25] text-white text-xs font-bold shadow-md transition flex items-center gap-2">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-300"></i>
+            <span>Сохранить контакты</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Блок 1: Контакты оптового отдела -->
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 space-y-4">
+            <h2 class="font-bold text-sm text-stone-900 border-b border-stone-100 pb-3 flex items-center gap-2">
+              <i data-lucide="phone" class="w-4 h-4 text-emerald-800"></i>
+              Контакты оптового отдела и шапки
+            </h2>
+
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Номер телефона (отображение)</label>
+              <input type="text" id="contentPhone" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-xs font-semibold focus:outline-none focus:border-emerald-800">
+              <p class="text-[11px] text-stone-400 mt-1">Пример: +7 (495) 275-30-95</p>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Ссылка на звонок (tel: без пробелов)</label>
+              <input type="text" id="contentPhoneRaw" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-xs font-semibold focus:outline-none focus:border-emerald-800">
+              <p class="text-[11px] text-stone-400 mt-1">Пример: +74952753095</p>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Ссылка на Telegram</label>
+              <input type="text" id="contentTelegram" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-xs font-semibold focus:outline-none focus:border-emerald-800">
+              <p class="text-[11px] text-stone-400 mt-1">Пример: https://t.me/manver_nets</p>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Отображаемый юзернейм Telegram</label>
+              <input type="text" id="contentTelegramHandle" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-xs font-semibold focus:outline-none focus:border-emerald-800">
+              <p class="text-[11px] text-stone-400 mt-1">Пример: @manver_nets</p>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Электронная почта (Email)</label>
+              <input type="email" id="contentEmail" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-xs font-semibold focus:outline-none focus:border-emerald-800">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Режим работы</label>
+              <input type="text" id="contentWorkingHours" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-xs font-semibold focus:outline-none focus:border-emerald-800">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Адрес производства и склада</label>
+              <input type="text" id="contentAddress" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-xs font-semibold focus:outline-none focus:border-emerald-800">
+            </div>
+          </div>
+
+          <!-- Блок 2: Главный баннер (Hero) и Настройки калькулятора -->
+          <div class="space-y-6">
+            
+            <div class="bg-white p-6 rounded-2xl border border-stone-200 space-y-4">
+              <h2 class="font-bold text-sm text-stone-900 border-b border-stone-100 pb-3 flex items-center gap-2">
+                <i data-lucide="layout" class="w-4 h-4 text-emerald-800"></i>
+                Главный экран сайта (Hero блок)
+              </h2>
+
+              <div>
+                <label class="block text-xs font-bold text-stone-700 mb-1">Верхний статус-бейдж</label>
+                <input type="text" id="contentHeroBadge" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-xs font-semibold focus:outline-none focus:border-emerald-800">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-stone-700 mb-1">Главный заголовок H1</label>
+                <textarea id="contentHeroTitle" rows="2" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-xs font-semibold focus:outline-none focus:border-emerald-800"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-stone-700 mb-1">Подзаголовок</label>
+                <textarea id="contentHeroSubtitle" rows="3" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-xs font-semibold focus:outline-none focus:border-emerald-800"></textarea>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-stone-200 space-y-4">
+              <h2 class="font-bold text-sm text-stone-900 border-b border-stone-100 pb-3 flex items-center gap-2">
+                <i data-lucide="calculator" class="w-4 h-4 text-emerald-800"></i>
+                Скидки калькулятора от объема
+              </h2>
+              <p class="text-xs text-stone-500">Автоматический расчет скидок при расчете площади на сайте:</p>
+              
+              <div class="space-y-2 text-xs">
+                <div class="flex items-center justify-between p-2.5 bg-stone-50 rounded-xl border border-stone-100">
+                  <span class="font-bold text-stone-700">От 50 м² до 99 м²</span>
+                  <span class="font-bold text-emerald-800">Скидка 5%</span>
+                </div>
+                <div class="flex items-center justify-between p-2.5 bg-stone-50 rounded-xl border border-stone-100">
+                  <span class="font-bold text-stone-700">От 100 м² до 299 м²</span>
+                  <span class="font-bold text-emerald-800">Скидка 10%</span>
+                </div>
+                <div class="flex items-center justify-between p-2.5 bg-stone-50 rounded-xl border border-stone-100">
+                  <span class="font-bold text-stone-700">От 300 м² до 499 м²</span>
+                  <span class="font-bold text-emerald-800">Скидка 15%</span>
+                </div>
+                <div class="flex items-center justify-between p-2.5 bg-stone-50 rounded-xl border border-stone-100">
+                  <span class="font-bold text-stone-700">От 500 м² и выше</span>
+                  <span class="font-bold text-emerald-800">Скидка 20% (Крупный опт)</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- ВКЛАДКА 3: ЖУРНАЛ ЗАЯВОК (LEADS) -->
+      <!-- ============================================================ -->
+      <section id="tab-leads" class="space-y-6 hidden">
+        
+        <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 class="heading-font text-xl font-extrabold text-stone-950 flex items-center gap-2">
+              <span>Журнал клиентских заявок</span>
+              <span id="leadsTotalBadge" class="bg-stone-100 text-stone-700 text-xs px-2.5 py-0.5 rounded-full font-bold">0 заявок</span>
+            </h1>
+            <p class="text-xs text-stone-500 mt-0.5">Все обращения с калькулятора, обратных звонков и карточек товаров</p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="loadAdminData()" class="px-3 py-2 rounded-xl border border-stone-200 hover:bg-stone-50 text-xs font-semibold text-stone-700 flex items-center gap-1.5 transition">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+              <span>Обновить</span>
+            </button>
+            <button onclick="exportLeadsCsv()" class="px-3 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold flex items-center gap-1.5 transition">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Экспорт CSV</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Таблица заявок -->
+        <div class="bg-white rounded-2xl border border-stone-200 shadow-xs overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-stone-50 border-b border-stone-200 text-stone-500 uppercase tracking-wider font-bold">
+                <tr>
+                  <th class="py-3 px-4">Дата / Время</th>
+                  <th class="py-3 px-4">Клиент / Телефон</th>
+                  <th class="py-3 px-4">Тип обращения</th>
+                  <th class="py-3 px-4">Детали / Заказ</th>
+                  <th class="py-3 px-4">Статус</th>
+                  <th class="py-3 px-4 text-right">Действие</th>
+                </tr>
+              </thead>
+              <tbody id="leadsTableBody" class="divide-y divide-stone-100">
+                <!-- Генерируется из JavaScript -->
+              </tbody>
+            </table>
+          </div>
+          <div id="leadsEmptyNotice" class="py-12 text-center text-stone-400 hidden">
+            <i data-lucide="inbox" class="w-8 h-8 mx-auto mb-2 text-stone-300"></i>
+            <p class="text-xs font-medium">Заявок пока нет</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- ВКЛАДКА 4: БЕЗОПАСНОСТЬ (SECURITY) -->
+      <!-- ============================================================ -->
+      <section id="tab-security" class="space-y-6 hidden">
+        
+        <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-xs">
+          <h1 class="heading-font text-xl font-extrabold text-stone-950">Настройки безопасности</h1>
+          <p class="text-xs text-stone-500 mt-0.5">Смена пароля администратора для входа в панель управления</p>
+        </div>
+
+        <div class="max-w-md bg-white p-6 rounded-2xl border border-stone-200 shadow-xs space-y-4">
+          <h2 class="font-bold text-sm text-stone-900 border-b border-stone-100 pb-3 flex items-center gap-2">
+            <i data-lucide="key" class="w-4 h-4 text-emerald-800"></i>
+            Сменить пароль доступа
+          </h2>
+
+          <form id="passwordForm" class="space-y-4" onsubmit="event.preventDefault(); changePassword();">
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Текущий пароль</label>
+              <input type="password" id="currentPassword" required placeholder="Введите текущий пароль" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:outline-none focus:border-emerald-800">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Новый пароль</label>
+              <input type="password" id="newPassword" required placeholder="Минимум 4 символа" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:outline-none focus:border-emerald-800">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Повторите новый пароль</label>
+              <input type="password" id="confirmPassword" required placeholder="Повторите новый пароль" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:outline-none focus:border-emerald-800">
+            </div>
+
+            <button type="submit" class="w-full py-2.5 rounded-xl bg-[#15432A] hover:bg-[#0F3B25] text-white text-xs font-bold shadow transition flex items-center justify-center gap-2">
+              <i data-lucide="shield" class="w-4 h-4 text-emerald-300"></i>
+              <span>Обновить пароль</span>
+            </button>
+          </form>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- ПОДВАЛ ПАНЕЛИ -->
+    <footer class="bg-white border-t border-stone-200 py-3 text-center text-xs text-stone-400">
+      MANVER Manufacturing Admin • Версия 2.0 • Все изменения сохраняются в JSON и JavaScript синхронно
+    </footer>
+
+  </div>
+
+  <!-- ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ (TOASTS) -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ============================================================ -->
+  <!-- СЦЕНАРИИ И ЛОГИКА АДМИН-ПАНЕЛИ (JAVASCRIPT) -->
+  <!-- ============================================================ -->
+  <script>
+    let appState = {
+      authenticated: false,
+      products: [],
+      content: {},
+      leads: [],
+      filterCategory: 'all',
+      searchQuery: ''
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      checkAuthAndInit();
+      initLoginListener();
+    });
+
+    function initIcons() {
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+
+    function authFetch(url, options = {}) {
+      const token = localStorage.getItem('manver_admin_token') || '';
+      options.headers = options.headers || {};
+      if (token && !options.headers['X-Admin-Token']) {
+        options.headers['X-Admin-Token'] = token;
+      }
+      return fetch(url, options);
+    }
+
+    // Проверка авторизации
+    async function checkAuthAndInit() {
+      // Поддержка быстрого входа через URL (?autologin=1 или ?token=...)
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlToken = urlParams.get('token');
+      if (urlToken) {
+        localStorage.setItem('manver_admin_token', urlToken);
+      }
+      const autologin = urlParams.get('autologin');
+      if (autologin) {
+        const pass = autologin === '1' ? 'admin' : autologin;
+        await doLogin(pass);
+        return;
+      }
+
+      try {
+        const res = await authFetch('/api/data');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.authenticated) {
+            appState.authenticated = true;
+            appState.products = data.products || [];
+            appState.content = data.content || {};
+            appState.leads = data.leads || [];
+            document.getElementById('loginOverlay').classList.add('hidden');
+            renderAll();
+            return;
+          }
+        }
+      } catch (e) {
+        console.error('Server status check failed', e);
+      }
+
+      // Не авторизован - показываем окно логина
+      showLoginModal();
+    }
+
+    function showLoginModal() {
+      document.getElementById('loginOverlay').classList.remove('hidden');
+      initIcons();
+    }
+
+    function initLoginListener() {
+      const form = document.getElementById('loginForm');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const pass = document.getElementById('loginPassword').value;
+        await doLogin(pass);
+      });
+    }
+
+    async function doLogin(pass) {
+      const errDiv = document.getElementById('loginError');
+      if (errDiv) errDiv.classList.add('hidden');
+
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pass })
+        });
+        const result = await res.json();
+        if (result.ok) {
+          if (result.token) {
+            localStorage.setItem('manver_admin_token', result.token);
+          }
+          document.getElementById('loginOverlay').classList.add('hidden');
+          showToast('Успешный вход в систему!', 'success');
+          await loadAdminData();
+          return true;
+        } else {
+          if (errDiv) {
+            errDiv.textContent = result.error || 'Неверный пароль';
+            errDiv.classList.remove('hidden');
+          }
+          return false;
+        }
+      } catch (err) {
+        if (errDiv) {
+          errDiv.textContent = 'Ошибка связи с сервером';
+          errDiv.classList.remove('hidden');
+        }
+        return false;
+      }
+    }
+
+    async function loadAdminData() {
+      try {
+        const res = await authFetch('/api/data');
+        if (res.ok) {
+          const data = await res.json();
+          appState.products = data.products || [];
+          appState.content = data.content || {};
+          appState.leads = data.leads || [];
+          renderAll();
+        }
+      } catch (e) {
+        showToast('Не удалось загрузить данные', 'error');
+      }
+    }
+
+    async function logoutAdmin() {
+      try {
+        await authFetch('/api/logout', { method: 'POST' });
+      } catch (e) {}
+      localStorage.removeItem('manver_admin_token');
+      window.location.reload();
+    }
+
+    function togglePasswordVisibility(inputId) {
+      const input = document.getElementById(inputId);
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
+    // Переключение табов
+    function switchTab(tabName) {
+      const tabs = ['products', 'content', 'leads', 'security'];
+      tabs.forEach(t => {
+        const section = document.getElementById('tab-' + t);
+        const btn = document.getElementById('tabBtn-' + t);
+        const mobBtn = document.getElementById('mobTabBtn-' + t);
+
+        if (t === tabName) {
+          if (section) section.classList.remove('hidden');
+          if (btn) {
+            btn.classList.add('bg-white', 'text-stone-900', 'shadow-xs');
+            btn.classList.remove('text-stone-600');
+          }
+          if (mobBtn) {
+            mobBtn.classList.add('bg-white', 'text-stone-900', 'shadow-xs');
+            mobBtn.classList.remove('text-stone-600');
+          }
+        } else {
+          if (section) section.classList.add('hidden');
+          if (btn) {
+            btn.classList.remove('bg-white', 'text-stone-900', 'shadow-xs');
+            btn.classList.add('text-stone-600');
+          }
+          if (mobBtn) {
+            mobBtn.classList.remove('bg-white', 'text-stone-900', 'shadow-xs');
+            mobBtn.classList.add('text-stone-600');
+          }
+        }
+      });
+      initIcons();
+    }
+
+    // Рендеринг всех данных
+    function renderAll() {
+      renderProductsList();
+      renderContentForm();
+      renderLeadsTable();
+      const hashTab = (window.location.hash || '').replace('#', '');
+      if (['products', 'content', 'leads', 'security'].includes(hashTab)) {
+        switchTab(hashTab);
+      }
+      initIcons();
+    }
+
+    // -----------------------------------------------------------------
+    // КАТАЛОГ ТОВАРОВ (PRODUCTS TAB)
+    // -----------------------------------------------------------------
+    function filterCatalog(category, btn) {
+      appState.filterCategory = category;
+      document.querySelectorAll('.prod-filter-btn').forEach(b => {
+        b.classList.remove('bg-emerald-900', 'text-white');
+        b.classList.add('bg-white', 'border', 'border-stone-200', 'text-stone-700');
+      });
+      btn.classList.add('bg-emerald-900', 'text-white');
+      btn.classList.remove('bg-white', 'border', 'border-stone-200', 'text-stone-700');
+      renderProductsList();
+    }
+
+    function onSearchProducts(val) {
+      appState.searchQuery = (val || '').toLowerCase().trim();
+      renderProductsList();
+    }
+
+    function renderProductsList() {
+      const container = document.getElementById('productsAdminList');
+      if (!container) return;
+
+      const filtered = appState.products.filter(p => {
+        const matchCategory = appState.filterCategory === 'all' || p.category === appState.filterCategory;
+        const matchSearch = !appState.searchQuery || 
+                            p.name.toLowerCase().includes(appState.searchQuery) || 
+                            (p.description && p.description.toLowerCase().includes(appState.searchQuery));
+        return matchCategory && matchSearch;
+      });
+
+      document.getElementById('productsCounterBadge').textContent = appState.products.length;
+
+      container.innerHTML = filtered.map((p, idx) => {
+        const sizesStr = Array.isArray(p.inStockSizes) ? p.inStockSizes.join(', ') : (p.inStockSizes || '');
+        return `
+          <div class="bg-white rounded-2xl border border-stone-200 shadow-xs overflow-hidden flex flex-col md:flex-row hover:border-emerald-700 transition" id="prod-card-${p.id}">
+            
+            <!-- Левая колонка: Фотография и Drag-and-Drop загрузка -->
+            <div class="md:w-56 shrink-0 bg-stone-900 flex flex-col relative group">
+              <img src="${p.image || 'assets/images/camo_weave_detail_hd.jpg'}" 
+                   id="prod-img-${p.id}" 
+                   alt="${p.name}" 
+                   class="w-full h-48 md:h-full object-cover object-center">
+              
+              <!-- Зона загрузки нового фото -->
+              <div class="absolute inset-0 bg-stone-950/75 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center p-3 text-center drop-zone cursor-pointer"
+                   onclick="document.getElementById('file-input-${p.id}').click()"
+                   ondragover="onDragOver(event)"
+                   ondragleave="onDragLeave(event)"
+                   ondrop="onDropFile(event, ${p.id})">
+                <i data-lucide="upload-cloud" class="w-7 h-7 text-emerald-400 mb-1.5"></i>
+                <span class="text-xs text-white font-bold">Загрузить фото</span>
+                <span class="text-[10px] text-stone-300 mt-0.5">Клик или перетащите файл</span>
+                <input type="file" id="file-input-${p.id}" class="hidden" accept="image/*" onchange="onFileSelected(event, ${p.id})">
+              </div>
+
+              <!-- Бейдж категории -->
+              <div class="absolute top-2.5 left-2.5">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-900/90 text-white border border-white/20">
+                  № ${p.id}
+                </span>
+              </div>
+            </div>
+
+            <!-- Правая колонка: Форма редактирования характеристик -->
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-3.5">
+              
+              <div class="space-y-3">
+                <!-- Название товара -->
+                <div>
+                  <label class="block text-[11px] font-bold text-stone-500 uppercase tracking-wider mb-1">Название товара</label>
+                  <input type="text" value="${escapeHtml(p.name)}" 
+                         onchange="updateProductProp(${p.id}, 'name', this.value)"
+                         class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-1.5 text-xs font-bold text-stone-950 focus:outline-none focus:border-emerald-800">
+                </div>
+
+                <!-- Строка с Ценой и Категорией -->
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-[11px] font-bold text-stone-500 uppercase tracking-wider mb-1">Цена за м² (₽)</label>
+                    <div class="relative">
+                      <input type="number" value="${p.pricePerM2 || 0}" 
+                             onchange="updateProductProp(${p.id}, 'pricePerM2', parseInt(this.value) || 0)"
+                             class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-1.5 text-xs font-extrabold text-emerald-900 focus:outline-none focus:border-emerald-800">
+                      <span class="absolute right-3 top-1.5 text-xs font-bold text-stone-400">₽/м²</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-[11px] font-bold text-stone-500 uppercase tracking-wider mb-1">Категория</label>
+                    <select onchange="onCategoryChange(${p.id}, this.value)" class="w-full bg-stone-50 border border-stone-200 rounded-xl px-2.5 py-1.5 text-xs font-medium text-stone-800 focus:outline-none focus:border-emerald-800">
+                      <option value="forest" ${p.category === 'forest' ? 'selected' : ''}>Лес и хвоя</option>
+                      <option value="tactical" ${p.category === 'tactical' ? 'selected' : ''}>Тактические и камо</option>
+                      <option value="steppe" ${p.category === 'steppe' ? 'selected' : ''}>Степь и песок</option>
+                      <option value="winter" ${p.category === 'winter' ? 'selected' : ''}>Зимние</option>
+                      <option value="base" ${p.category === 'base' ? 'selected' : ''}>Основы для сетей</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Размеры в наличии -->
+                <div>
+                  <label class="block text-[11px] font-bold text-stone-500 uppercase tracking-wider mb-1">Размеры на складе (через запятую)</label>
+                  <input type="text" value="${escapeHtml(sizesStr)}" 
+                         onchange="updateProductSizes(${p.id}, this.value)"
+                         class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-1.5 text-xs font-medium text-stone-800 focus:outline-none focus:border-emerald-800"
+                         placeholder="2×3 м, 3×5 м, 3×6 м, 4×6 м, Под заказ">
+                </div>
+
+                <!-- Затенение и Основа -->
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-[11px] font-bold text-stone-500 uppercase tracking-wider mb-1">Затенение</label>
+                    <input type="text" value="${escapeHtml(p.shading || '85%')}" 
+                           onchange="updateProductProp(${p.id}, 'shading', this.value)"
+                           class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-1.5 text-xs text-stone-800 focus:outline-none focus:border-emerald-800">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-bold text-stone-500 uppercase tracking-wider mb-1">Маркетинговый бейдж</label>
+                    <input type="text" value="${escapeHtml(p.badge || 'В наличии')}" 
+                           onchange="updateProductProp(${p.id}, 'badge', this.value)"
+                           class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-1.5 text-xs font-semibold text-stone-800 focus:outline-none focus:border-emerald-800">
+                  </div>
+                </div>
+
+                <!-- Описание -->
+                <div>
+                  <label class="block text-[11px] font-bold text-stone-500 uppercase tracking-wider mb-1">Краткое описание для сайта</label>
+                  <textarea rows="2" 
+                            onchange="updateProductProp(${p.id}, 'description', this.value)"
+                            class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-1.5 text-xs text-stone-700 focus:outline-none focus:border-emerald-800">${escapeHtml(p.description || '')}</textarea>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        `;
+      }).join('');
+
+      initIcons();
+    }
+
+    function updateProductProp(id, prop, value) {
+      const prod = appState.products.find(p => p.id === id);
+      if (prod) {
+        prod[prop] = value;
+      }
+    }
+
+    function updateProductSizes(id, sizesStr) {
+      const prod = appState.products.find(p => p.id === id);
+      if (prod) {
+        prod.inStockSizes = sizesStr.split(',').map(s => s.trim()).filter(Boolean);
+      }
+    }
+
+    function onCategoryChange(id, catValue) {
+      const prod = appState.products.find(p => p.id === id);
+      if (prod) {
+        prod.category = catValue;
+        const catMap = {
+          'forest': 'Лес и хвоя',
+          'tactical': 'Тактические и камо',
+          'steppe': 'Степь и песок',
+          'winter': 'Зимние',
+          'base': 'Основы для сетей'
+        };
+        prod.categoryName = catMap[catValue] || 'Маскировочные сети';
+      }
+    }
+
+    // Загрузка фото товара
+    function onDragOver(e) {
+      e.preventDefault();
+      e.currentTarget.classList.add('dragover');
+    }
+
+    function onDragLeave(e) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('dragover');
+    }
+
+    function onDropFile(e, productId) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('dragover');
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        uploadProductImage(productId, e.dataTransfer.files[0]);
+      }
+    }
+
+    function onFileSelected(e, productId) {
+      if (e.target.files && e.target.files[0]) {
+        uploadProductImage(productId, e.target.files[0]);
+      }
+    }
+
+    async function uploadProductImage(productId, file) {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const base64Data = e.target.result;
+        showToast('Загрузка фотографии...', 'info');
+
+        try {
+          const res = await authFetch('/api/upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              filename: file.name,
+              data: base64Data
+            })
+          });
+
+          const result = await res.json();
+          if (result.ok && result.path) {
+            updateProductProp(productId, 'image', result.path);
+            const imgEl = document.getElementById(`prod-img-${productId}`);
+            if (imgEl) imgEl.src = result.path;
+            showToast('Фотография успешно обновлена! Нажмите «Сохранить изменения каталога».', 'success');
+          } else {
+            showToast('Ошибка загрузки фото: ' + (result.error || 'Неизвестная ошибка'), 'error');
+          }
+        } catch (err) {
+          showToast('Ошибка сети при загрузке фото', 'error');
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function saveProducts() {
+      showToast('Сохранение каталога...', 'info');
+      try {
+        const res = await authFetch('/api/save-products', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ products: appState.products })
+        });
+        const result = await res.json();
+        if (result.ok) {
+          showToast('Каталог из ' + result.count + ' товаров успешно сохранен на сайте!', 'success');
+        } else {
+          showToast('Ошибка сохранения: ' + (result.error || ''), 'error');
+        }
+      } catch (err) {
+        showToast('Ошибка сети при сохранении каталога', 'error');
+      }
+    }
+
+    // -----------------------------------------------------------------
+    // КОНТАКТЫ И ТЕКСТЫ (CONTENT TAB)
+    // -----------------------------------------------------------------
+    function renderContentForm() {
+      const c = appState.content.contacts || {};
+      const h = appState.content.hero || {};
+
+      document.getElementById('contentPhone').value = c.phone || '+7 (495) 275-30-95';
+      document.getElementById('contentPhoneRaw').value = c.phoneRaw || '+74952753095';
+      document.getElementById('contentTelegram').value = c.telegram || 'https://t.me/manver_nets';
+      document.getElementById('contentTelegramHandle').value = c.telegramHandle || '@manver_nets';
+      document.getElementById('contentEmail').value = c.email || 'sale@manver.ru';
+      document.getElementById('contentWorkingHours').value = c.workingHours || 'Пн-Пт: 8:00 - 19:00 (МСК)';
+      document.getElementById('contentAddress').value = c.address || 'Московская область, г. Щелково, Заводская ул., д. 2';
+
+      document.getElementById('contentHeroBadge').value = h.badge || 'Собственное производство маскировочных сетей полного цикла';
+      document.getElementById('contentHeroTitle').value = h.title || 'Маскировочные сети оптом напрямую от производителя MANVER';
+      document.getElementById('contentHeroSubtitle').value = h.subtitle || 'От 290 ₽/м². Изготовление от 24 часов. Гарантия по ГОСТ. Доставка по всей России со складов в Москве и МО.';
+    }
+
+    async function saveContent() {
+      showToast('Сохранение контактов...', 'info');
+      const updatedContent = {
+        contacts: {
+          phone: document.getElementById('contentPhone').value.trim(),
+          phoneRaw: document.getElementById('contentPhoneRaw').value.trim(),
+          telegram: document.getElementById('contentTelegram').value.trim(),
+          telegramHandle: document.getElementById('contentTelegramHandle').value.trim(),
+          email: document.getElementById('contentEmail').value.trim(),
+          workingHours: document.getElementById('contentWorkingHours').value.trim(),
+          address: document.getElementById('contentAddress').value.trim()
+        },
+        hero: {
+          badge: document.getElementById('contentHeroBadge').value.trim(),
+          title: document.getElementById('contentHeroTitle').value.trim(),
+          subtitle: document.getElementById('contentHeroSubtitle').value.trim()
+        },
+        calculator: appState.content.calculator || {}
+      };
+
+      try {
+        const res = await authFetch('/api/save-content', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content: updatedContent })
+        });
+        const result = await res.json();
+        if (result.ok) {
+          appState.content = updatedContent;
+          showToast('Контакты и тексты успешно обновлены на сайте!', 'success');
+        } else {
+          showToast('Ошибка сохранения: ' + (result.error || ''), 'error');
+        }
+      } catch (e) {
+        showToast('Ошибка сети при сохранении контактов', 'error');
+      }
+    }
+
+    // -----------------------------------------------------------------
+    // ЖУРНАЛ ЗАЯВОК (LEADS TAB)
+    // -----------------------------------------------------------------
+    function renderLeadsTable() {
+      const tbody = document.getElementById('leadsTableBody');
+      const emptyNotice = document.getElementById('leadsEmptyNotice');
+      const totalBadge = document.getElementById('leadsTotalBadge');
+      const newBadge = document.getElementById('leadsNewCountBadge');
+
+      if (!tbody) return;
+
+      const leads = appState.leads || [];
+      const newCount = leads.filter(l => l.status === 'Новая').length;
+
+      totalBadge.textContent = leads.length + ' заявок';
+      if (newCount > 0) {
+        newBadge.textContent = newCount;
+        newBadge.classList.remove('hidden');
+      } else {
+        newBadge.classList.add('hidden');
+      }
+
+      if (leads.length === 0) {
+        tbody.innerHTML = '';
+        emptyNotice.classList.remove('hidden');
+        return;
+      }
+
+      emptyNotice.classList.add('hidden');
+      tbody.innerHTML = leads.map(l => {
+        let statusClass = 'bg-stone-100 text-stone-700';
+        if (l.status === 'Новая') statusClass = 'bg-emerald-100 text-emerald-800 font-bold';
+        else if (l.status === 'В обработке') statusClass = 'bg-amber-100 text-amber-900 font-semibold';
+        else if (l.status === 'Выполнена') statusClass = 'bg-blue-100 text-blue-800';
+
+        return `
+          <tr class="hover:bg-stone-50/80 transition">
+            <td class="py-3 px-4 whitespace-nowrap text-stone-500 font-medium">${l.date || ''}</td>
+            <td class="py-3 px-4">
+              <div class="font-bold text-stone-900">${escapeHtml(l.name || 'Клиент')}</div>
+              <a href="tel:${l.phone}" class="text-emerald-900 font-extrabold hover:underline">${l.phone || ''}</a>
+            </td>
+            <td class="py-3 px-4 whitespace-nowrap">
+              <span class="px-2 py-0.5 rounded bg-stone-100 text-stone-700 text-[11px] font-semibold">
+                ${escapeHtml(l.type || 'Заявка')}
+              </span>
+            </td>
+            <td class="py-3 px-4 text-stone-600 max-w-xs">
+              <p class="truncate" title="${escapeHtml(l.details || '')}">${escapeHtml(l.details || '—')}</p>
+            </td>
+            <td class="py-3 px-4 whitespace-nowrap">
+              <select onchange="updateLeadStatus('${l.id}', this.value)" class="text-xs rounded-lg px-2.5 py-1 border border-stone-200 font-semibold ${statusClass} focus:outline-none">
+                <option value="Новая" ${l.status === 'Новая' ? 'selected' : ''}>🟢 Новая</option>
+                <option value="В обработке" ${l.status === 'В обработке' ? 'selected' : ''}>🟡 В обработке</option>
+                <option value="Выполнена" ${l.status === 'Выполнена' ? 'selected' : ''}>🔵 Выполнена</option>
+              </select>
+            </td>
+            <td class="py-3 px-4 text-right whitespace-nowrap">
+              <button onclick="deleteLead('${l.id}')" class="p-1.5 text-stone-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition" title="Удалить заявку">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      initIcons();
+    }
+
+    async function updateLeadStatus(id, newStatus) {
+      try {
+        const res = await authFetch('/api/update-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, status: newStatus })
+        });
+        if (res.ok) {
+          const lead = appState.leads.find(l => l.id === id);
+          if (lead) lead.status = newStatus;
+          renderLeadsTable();
+          showToast('Статус заявки изменен', 'success');
+        }
+      } catch (e) {
+        showToast('Ошибка смены статуса', 'error');
+      }
+    }
+
+    async function deleteLead(id) {
+      if (!confirm('Вы уверены, что хотите удалить эту заявку?')) return;
+      try {
+        const res = await authFetch('/api/delete-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id })
+        });
+        if (res.ok) {
+          appState.leads = appState.leads.filter(l => l.id !== id);
+          renderLeadsTable();
+          showToast('Заявка удалена', 'info');
+        }
+      } catch (e) {
+        showToast('Ошибка при удалении', 'error');
+      }
+    }
+
+    function exportLeadsCsv() {
+      if (!appState.leads || appState.leads.length === 0) {
+        showToast('Нет заявок для экспорта', 'info');
+        return;
+      }
+      let csv = '\uFEFFДата;Клиент;Телефон;Тип;Детали;Статус\n';
+      appState.leads.forEach(l => {
+        csv += `"${l.date || ''}";"${l.name || ''}";"${l.phone || ''}";"${l.type || ''}";"${(l.details || '').replace(/"/g, '""')}";"${l.status || ''}"\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `manver_leads_${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+    }
+
+    // -----------------------------------------------------------------
+    // БЕЗОПАСНОСТЬ (SECURITY TAB)
+    // -----------------------------------------------------------------
+    async function changePassword() {
+      const curr = document.getElementById('currentPassword').value;
+      const newP = document.getElementById('newPassword').value;
+      const conf = document.getElementById('confirmPassword').value;
+
+      if (newP !== conf) {
+        showToast('Новый пароль и подтверждение не совпадают!', 'error');
+        return;
+      }
+
+      try {
+        const res = await authFetch('/api/change-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ currentPassword: curr, newPassword: newP })
+        });
+        const result = await res.json();
+        if (result.ok) {
+          showToast('Пароль администратора успешно изменен!', 'success');
+          document.getElementById('passwordForm').reset();
+        } else {
+          showToast(result.error || 'Ошибка смены пароля', 'error');
+        }
+      } catch (e) {
+        showToast('Ошибка связи с сервером', 'error');
+      }
+    }
+
+    // -----------------------------------------------------------------
+    // УВЕДОМЛЕНИЯ (TOASTS)
+    // -----------------------------------------------------------------
+    function showToast(msg, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      
+      let bg = 'bg-stone-900 text-white';
+      let icon = 'info';
+      if (type === 'success') {
+        bg = 'bg-[#15432A] text-white';
+        icon = 'check-circle';
+      } else if (type === 'error') {
+        bg = 'bg-red-700 text-white';
+        icon = 'alert-triangle';
+      }
+
+      toast.className = `${bg} px-4 py-3 rounded-2xl shadow-xl text-xs font-bold flex items-center gap-2.5 toast-enter pointer-events-auto`;
+      toast.innerHTML = `<i data-lucide="${icon}" class="w-4 h-4 shrink-0"></i><span>${escapeHtml(msg)}</span>`;
+      container.appendChild(toast);
+      initIcons();
+
+      setTimeout(() => toast.classList.add('toast-show'), 10);
+      setTimeout(() => {
+        toast.classList.remove('toast-show');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>
