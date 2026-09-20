@@ -132,57 +132,62 @@
   </header>
 
   <!-- ============================================================ -->
-  <!-- ПЕРВЫЙ ЭКРАН (HERO SECTION) — ТОЧНО ПО СОГЛАСОВАННОМУ МАКЕТУ -->
   <!-- ============================================================ -->
-  <section class="relative bg-white pt-6 pb-12 lg:pt-10 lg:pb-16 overflow-hidden">
+  <!-- ПЕРВЫЙ ЭКРАН (HERO SECTION) — БЕСШОВНОЕ ПЕРЕЛИВАНИЕ ФОТО И ТЕКСТА -->
+  <!-- ============================================================ -->
+  <section class="relative bg-white pt-3 pb-8 sm:pt-6 sm:pb-12 lg:pt-8 lg:pb-14 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      
+      <!-- Премиальная карточка-баннер со скругленными углами и переливающимся фоном по примеру -->
+      <div class="hero-banner-card">
         
-        <!-- Левая часть: Заголовок, подзаголовок и целевые кнопки -->
-        <div class="lg:col-span-6 space-y-5 sm:space-y-6">
-          <div class="text-xs font-bold tracking-wider text-stone-500 uppercase">
-            <span class="text-stone-900 font-black">MANVER</span> • СОБСТВЕННОЕ ПРОИЗВОДСТВО
+        <!-- Правая часть: Фотография маскировочной сети с бесшовным растворением -->
+        <div class="hero-image-wrap">
+          <img src="assets/images/hero_forest_camonet.jpg" 
+               alt="Маскировочные сети MANVER" 
+               class="hero-blend-image transition duration-700">
+          <div class="hero-image-overlay"></div>
+        </div>
+
+        <!-- Контентная часть (Текст и кнопки) -->
+        <div class="hero-text-wrap space-y-5 sm:space-y-6">
+          
+          <div class="text-xs font-bold tracking-wider text-stone-500 uppercase flex items-center gap-2">
+            <span class="text-stone-900 font-black">MANVER</span>
+            <span class="text-emerald-700">•</span>
+            <span class="text-emerald-900 font-bold">СОБСТВЕННОЕ ПРОИЗВОДСТВО</span>
           </div>
 
-          <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-stone-950 tracking-tight leading-snug">
-            Маскировочные сети <br>напрямую от производителя
+          <h1 class="text-[20px] sm:text-3xl md:text-4xl lg:text-[40px] xl:text-[44px] font-extrabold text-stone-950 tracking-tight leading-[1.2]">
+            <span class="block">Маскировочные сети</span>
+            <span class="block text-stone-900 mt-1 sm:mt-0">напрямую от производителя</span>
           </h1>
 
-          <p class="text-sm sm:text-lg text-stone-600 leading-relaxed max-w-xl">
+          <p class="text-sm sm:text-base lg:text-lg text-stone-600 leading-relaxed max-w-lg font-medium">
             Изготавливаем вручную под ваши размеры. <br class="hidden sm:inline">
             Для складов, крупных объектов и специальных задач.
           </p>
 
           <!-- Кнопки: главное действие — заявка на расчет -->
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
-            <a href="#contacts" class="px-6 py-3.5 rounded-xl bg-emerald-900 hover:bg-emerald-800 text-white font-bold text-sm shadow-sm hover:shadow transition text-center">
+            <a href="#calculator" class="px-6 sm:px-7 py-3.5 rounded-xl bg-[#15432A] hover:bg-[#0F3B25] text-white font-bold text-sm shadow-sm hover:shadow-md transition text-center whitespace-nowrap active:scale-[0.98]">
               Получить расчёт заказа
             </a>
 
-            <a href="#catalog" class="text-sm font-bold text-stone-900 hover:text-emerald-900 transition flex items-center justify-center gap-1.5 py-3 px-2">
+            <a href="#catalog" class="text-sm font-bold text-stone-900 hover:text-[#15432A] transition flex items-center justify-center gap-1.5 py-3 px-2 group">
               <span>Посмотреть продукцию</span>
-              <span class="text-emerald-700 font-extrabold text-base">→</span>
+              <span class="text-emerald-700 font-extrabold text-base transition transform group-hover:translate-x-1">→</span>
             </a>
           </div>
 
-          <p class="text-xs text-stone-500">
+          <p class="text-xs text-stone-500 font-medium">
             Подберём размер, расцветку и комплектацию
           </p>
-        </div>
 
-        <!-- Правая часть: Ультра-четкое фото промышленного ангара с сетью MANVER -->
-        <div class="lg:col-span-6">
-          <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-stone-200 group bg-stone-100">
-            <img src="assets/images/hero_net_top.jpg" alt="Маскировочные сети для складов и объектов MANVER" class="w-full h-[360px] sm:h-[420px] lg:h-[450px] object-cover object-center transition duration-700 group-hover:scale-[1.02]">
-            <div class="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-transparent to-transparent pointer-events-none"></div>
-            <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 bg-white/95 backdrop-blur-sm p-2.5 sm:px-4 sm:py-2.5 rounded-xl border border-white/40 shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1.5">
-              <span class="text-xs font-bold text-stone-900">Монтаж на объекте 12×18 м</span>
-              <span class="text-[11px] font-bold text-[#15432A] bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">Собственное производство</span>
-            </div>
-          </div>
         </div>
 
       </div>
+
     </div>
   </section>
 
