@@ -171,64 +171,61 @@ input[type=range] {
   }
 }
 
-/* Бесшовное переливание фотографии в фон первого экрана (по макету) */
-.hero-banner-card {
+/* Бесшовный первый экран (Hero Section) — органичное перетекание фотографии в чистый белый фон */
+.hero-seamless-section {
   position: relative;
-  overflow: hidden;
   background-color: #ffffff;
-  border: 1px solid rgba(231, 229, 228, 0.95);
-  border-radius: 28px;
-  min-height: 520px;
+  overflow: hidden;
   display: flex;
   align-items: center;
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+  min-height: 520px;
 }
 
-.hero-image-wrap {
+.hero-seamless-image-wrap {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
-  width: 58%;
+  width: 52%;
   height: 100%;
   pointer-events: none;
   overflow: hidden;
+  z-index: 1;
 }
 
-.hero-blend-image {
+.hero-seamless-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 75% center;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.04) 14%, rgba(0, 0, 0, 0.45) 32%, rgba(0, 0, 0, 0.95) 58%, #000 70%);
-  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.04) 14%, rgba(0, 0, 0, 0.45) 32%, rgba(0, 0, 0, 0.95) 58%, #000 70%);
+  object-position: 70% center;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.04) 15%, rgba(0, 0, 0, 0.5) 42%, #000 72%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.04) 15%, rgba(0, 0, 0, 0.5) 42%, #000 72%);
 }
 
-.hero-image-overlay {
+.hero-seamless-overlay {
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
-  width: 25%;
-  background: linear-gradient(to right, #ffffff 0%, rgba(255, 255, 255, 0.8) 40%, transparent 100%);
+  width: 35%;
+  background: linear-gradient(to right, #ffffff 0%, rgba(255, 255, 255, 0.85) 45%, transparent 100%);
   pointer-events: none;
 }
 
-.hero-text-wrap {
+.hero-seamless-content {
   position: relative;
   z-index: 10;
-  width: 52%;
-  padding: 56px 48px;
+  width: 100%;
 }
 
 @media (max-width: 1023px) {
-  .hero-banner-card {
+  .hero-seamless-section {
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     min-height: auto;
-    border-radius: 20px;
   }
-  .hero-image-wrap {
+  .hero-seamless-image-wrap {
     position: relative;
     top: auto;
     right: auto;
@@ -237,27 +234,29 @@ input[type=range] {
     height: 260px;
     order: 1;
   }
-  .hero-blend-image {
-    object-position: center 30%;
-    -webkit-mask-image: linear-gradient(to bottom, #000 45%, rgba(0, 0, 0, 0.7) 70%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 45%, rgba(0, 0, 0, 0.7) 70%, transparent 100%);
+  .hero-seamless-image {
+    object-position: center 35%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 40%, rgba(0, 0, 0, 0.7) 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 40%, rgba(0, 0, 0, 0.7) 70%, transparent 100%);
   }
-  .hero-image-overlay {
+  .hero-seamless-overlay {
     top: auto;
     left: 0;
     right: 0;
     bottom: 0;
     width: 100%;
-    height: 70px;
-    background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.85) 60%, #ffffff 100%);
+    height: 80px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.9) 65%, #ffffff 100%);
   }
-  .hero-text-wrap {
-    width: 100%;
-    padding: 20px 20px 32px;
+  .hero-seamless-container {
     order: 2;
-    margin-top: -16px;
+  }
+  .hero-seamless-content {
+    padding-top: 20px !important;
+    padding-bottom: 44px !important;
   }
 }
+
 
 /* Карточки макро-фотографий основы (блок «Прочная основа») */
 .macro-card-img-wrap {
