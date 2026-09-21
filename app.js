@@ -128,7 +128,10 @@ function renderProducts() {
             </button>
             <button onclick="sendToTelegramProduct('${encodeURIComponent(product.name)}', ${product.pricePerM2})"
               class="w-full py-2.5 px-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-900 font-semibold text-xs transition border border-sky-200 flex items-center justify-center gap-1.5" title="Задать вопрос в Telegram">
-              <i data-lucide="send" class="w-3.5 h-3.5 text-sky-600"></i>
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="12" fill="#24A1DE"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 12c3.4-1.5 5.7-2.5 6.9-3 3.3-1.4 4-1.6 4.5-1.6.1 0 .3 0 .4.1.1.1.2.2.2.4 0 .1 0 .3-.1.5-.2 1.9-1 6.5-1.4 8.6-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.5-1.9-.9-1.1-.7-1.7-1.1-2.7-1.8-1.2-.8-.4-1.2.3-1.9.2-.2 3.2-3 3.3-3.2 0 0 0-.1-.1-.2-.1 0-.2 0-.2 0-.1 0-1.8 1.1-5.1 3.3-.5.3-.9.5-1.3.5-.4 0-1.3-.2-1.9-.4-.8-.2-1.3-.4-1.3-.8 0-.2.3-.4.9-.7z" fill="white"/>
+              </svg>
               <span>Telegram</span>
             </button>
           </div>

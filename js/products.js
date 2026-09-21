@@ -17,7 +17,15 @@ const PRODUCTS = [
       "3×5 м",
       "3×6 м",
       "4×6 м",
-      "Под заказ"
+      "4×6 м",
+      "4×6 м",
+      "4×6 м",
+      "4×6 м",
+      "4×6 м",
+      "4×6 м",
+      "4×6 м",
+      "4×6 м",
+      "4×6 м"
     ],
     "badge": "Хит продаж",
     "badgeColor": "bg-emerald-700 text-white",
@@ -28,7 +36,7 @@ const PRODUCTS = [
       "#132516"
     ],
     "imageType": "forest_dark",
-    "image": "assets/images/products/prod_forest_dark.jpg"
+    "image": "assets/images/products/upload_20260921_225317_36bf22.jpeg"
   },
   {
     "id": 2,
@@ -54,7 +62,7 @@ const PRODUCTS = [
       "#626B38"
     ],
     "imageType": "moss_olive",
-    "image": "assets/images/products/prod_moss_olive.jpg"
+    "image": "assets/images/products/upload_20260921_225319_2bddae.jpeg"
   },
   {
     "id": 3,
@@ -81,7 +89,7 @@ const PRODUCTS = [
       "#302E24"
     ],
     "imageType": "multicam",
-    "image": "assets/images/products/prod_multicam.jpg"
+    "image": "assets/images/products/upload_20260921_225439_61cc5e.jpeg"
   },
   {
     "id": 4,
@@ -106,7 +114,7 @@ const PRODUCTS = [
       "#1A2514"
     ],
     "imageType": "pixel_emr",
-    "image": "assets/images/products/prod_pixel.jpg"
+    "image": "assets/images/products/upload_20260921_225443_b14452.jpeg"
   },
   {
     "id": 5,

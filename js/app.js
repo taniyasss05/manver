@@ -47,26 +47,10 @@ function initIcons() {
 }
 
 // -------------------------------------------------------------
-// КАТАЛОГ 20 ТОВАРОВ И ФИЛЬТРАЦИЯ
 // -------------------------------------------------------------
-let currentCategory = 'all';
-
+// КАТАЛОГ 12 ХОДОВЫХ ТОВАРОВ MANVER
+// -------------------------------------------------------------
 function initCatalog() {
-  const filterButtons = document.querySelectorAll('.catalog-filter-btn');
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach(b => {
-        b.classList.remove('bg-emerald-900', 'text-white');
-        b.classList.add('bg-white', 'text-stone-700', 'hover:bg-stone-100');
-      });
-      btn.classList.add('bg-emerald-900', 'text-white');
-      btn.classList.remove('bg-white', 'text-stone-700', 'hover:bg-stone-100');
-      
-      currentCategory = btn.dataset.category;
-      renderProducts();
-    });
-  });
-
   renderProducts();
 }
 
@@ -74,11 +58,10 @@ function renderProducts() {
   const grid = document.getElementById('productsGrid');
   if (!grid || !window.MANVER_PRODUCTS) return;
 
-  const filtered = currentCategory === 'all' 
-    ? window.MANVER_PRODUCTS 
-    : window.MANVER_PRODUCTS.filter(p => p.category === currentCategory);
+  // Строго 12 товаров для лаконичной и ровной сетки 3х4
+  const productsToRender = window.MANVER_PRODUCTS.slice(0, 12);
 
-  grid.innerHTML = filtered.map(product => {
+  grid.innerHTML = productsToRender.map(product => {
     return `
       <div class="product-card bg-white rounded-2xl border border-stone-200 overflow-hidden flex flex-col justify-between shadow-sm hover:border-emerald-700 transition">
         <div>
@@ -145,7 +128,10 @@ function renderProducts() {
             </button>
             <button onclick="sendToTelegramProduct('${encodeURIComponent(product.name)}', ${product.pricePerM2})"
               class="w-full py-2.5 px-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-900 font-semibold text-xs transition border border-sky-200 flex items-center justify-center gap-1.5" title="Задать вопрос в Telegram">
-              <i data-lucide="send" class="w-3.5 h-3.5 text-sky-600"></i>
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="12" fill="#24A1DE"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 12c3.4-1.5 5.7-2.5 6.9-3 3.3-1.4 4-1.6 4.5-1.6.1 0 .3 0 .4.1.1.1.2.2.2.4 0 .1 0 .3-.1.5-.2 1.9-1 6.5-1.4 8.6-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.5-1.9-.9-1.1-.7-1.7-1.1-2.7-1.8-1.2-.8-.4-1.2.3-1.9.2-.2 3.2-3 3.3-3.2 0 0 0-.1-.1-.2-.1 0-.2 0-.2 0-.1 0-1.8 1.1-5.1 3.3-.5.3-.9.5-1.3.5-.4 0-1.3-.2-1.9-.4-.8-.2-1.3-.4-1.3-.8 0-.2.3-.4.9-.7z" fill="white"/>
+              </svg>
               <span>Telegram</span>
             </button>
           </div>
@@ -260,6 +246,27 @@ function calculateTotal() {
     leadTimeEl.innerText = area <= 30 ? 'В наличии на складе (отгрузка сегодня)' : 'Изготовление под заказ: 1–2 рабочих дня';
   }
 }
+
+// Выбор размера из блока «Прочная основа»
+window.selectCalcSize = function(width, length) {
+  const widthInput = document.getElementById('calcWidth');
+  const lengthInput = document.getElementById('calcLength');
+  const widthSlider = document.getElementById('calcWidthSlider');
+  const lengthSlider = document.getElementById('calcLengthSlider');
+
+  if (widthInput && lengthInput) {
+    widthInput.value = width;
+    lengthInput.value = length;
+    if (widthSlider) widthSlider.value = width;
+    if (lengthSlider) lengthSlider.value = length;
+    calculateCost();
+  }
+
+  const calcSection = document.getElementById('calculator');
+  if (calcSection) {
+    calcSection.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 
 // Быстрый заказ из калькулятора
 window.orderFromCalculator = function() {

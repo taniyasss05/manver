@@ -170,3 +170,117 @@ input[type=range] {
     line-height: 1;
   }
 }
+
+/* Первый экран (Hero Section) — симметричный баннер в сетке сайта (по референсу) */
+.hero-banner-card {
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 1px solid rgba(231, 229, 228, 0.9);
+  border-radius: 16px;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03);
+}
+
+.hero-image-wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 55%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-blend-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 72% center;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.04) 14%, rgba(0, 0, 0, 0.45) 32%, #000 65%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.04) 14%, rgba(0, 0, 0, 0.45) 32%, #000 65%);
+}
+
+.hero-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 25%;
+  background: linear-gradient(to right, #ffffff 0%, rgba(255, 255, 255, 0.8) 40%, transparent 100%);
+  pointer-events: none;
+}
+
+.hero-text-wrap {
+  position: relative;
+  z-index: 10;
+  width: 52%;
+}
+
+@media (max-width: 1023px) {
+  .hero-banner-card {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: auto;
+    border-radius: 16px;
+  }
+  .hero-image-wrap {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    height: 250px;
+    order: 1;
+  }
+  .hero-blend-image {
+    object-position: center 35%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 45%, rgba(0, 0, 0, 0.7) 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 45%, rgba(0, 0, 0, 0.7) 70%, transparent 100%);
+  }
+  .hero-image-overlay {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.9) 65%, #ffffff 100%);
+  }
+  .hero-text-wrap {
+    width: 100%;
+    padding: 20px 20px 36px;
+    order: 2;
+  }
+}
+
+
+/* Карточки макро-фотографий основы (блок «Прочная основа») */
+.macro-card-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+}
+
+@media (max-width: 1023px) {
+  .macro-card-img-wrap {
+    height: 260px;
+  }
+}
+
+@media (max-width: 639px) {
+  .macro-card-img-wrap {
+    height: 220px;
+  }
+}
+
+/* Дополнительные размерные утилиты */
+.w-8 { width: 2rem !important; }
+.h-8 { height: 2rem !important; }
+.w-7 { width: 1.75rem !important; }
+.h-7 { height: 1.75rem !important; }
+
