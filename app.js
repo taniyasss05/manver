@@ -47,26 +47,10 @@ function initIcons() {
 }
 
 // -------------------------------------------------------------
-// КАТАЛОГ 20 ТОВАРОВ И ФИЛЬТРАЦИЯ
 // -------------------------------------------------------------
-let currentCategory = 'all';
-
+// КАТАЛОГ 12 ХОДОВЫХ ТОВАРОВ MANVER
+// -------------------------------------------------------------
 function initCatalog() {
-  const filterButtons = document.querySelectorAll('.catalog-filter-btn');
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach(b => {
-        b.classList.remove('bg-emerald-900', 'text-white');
-        b.classList.add('bg-white', 'text-stone-700', 'hover:bg-stone-100');
-      });
-      btn.classList.add('bg-emerald-900', 'text-white');
-      btn.classList.remove('bg-white', 'text-stone-700', 'hover:bg-stone-100');
-      
-      currentCategory = btn.dataset.category;
-      renderProducts();
-    });
-  });
-
   renderProducts();
 }
 
@@ -74,11 +58,10 @@ function renderProducts() {
   const grid = document.getElementById('productsGrid');
   if (!grid || !window.MANVER_PRODUCTS) return;
 
-  const filtered = currentCategory === 'all' 
-    ? window.MANVER_PRODUCTS 
-    : window.MANVER_PRODUCTS.filter(p => p.category === currentCategory);
+  // Строго 12 товаров для лаконичной и ровной сетки 3х4
+  const productsToRender = window.MANVER_PRODUCTS.slice(0, 12);
 
-  grid.innerHTML = filtered.map(product => {
+  grid.innerHTML = productsToRender.map(product => {
     return `
       <div class="product-card bg-white rounded-2xl border border-stone-200 overflow-hidden flex flex-col justify-between shadow-sm hover:border-emerald-700 transition">
         <div>
