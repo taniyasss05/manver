@@ -68,6 +68,7 @@ function renderProducts() {
           <!-- Фотография товара / фактуры сети -->
           <div class="relative h-48 w-full overflow-hidden bg-stone-900 border-b border-stone-100 group">
             <img src="${product.image || 'assets/images/camo_weave_detail_hd.jpg'}" 
+                 onerror="if(!this.dataset.retried){this.dataset.retried='1';var f=this.src.split('/').pop().split('?')[0];this.src=f;}else if(this.dataset.retried==='1'){this.dataset.retried='2';this.src='assets/images/camo_weave_detail_hd.jpg';}else{this.onerror=null;this.src='camo_weave_detail_hd.jpg';}"
                  alt="${product.name}" 
                  class="w-full h-full object-cover object-center transition duration-500 group-hover:scale-105"
                  loading="lazy">

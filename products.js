@@ -1,5 +1,5 @@
 /**
- * Каталог 12 ходовых товаров и сетевых основ MANVER
+ * Каталог 20 ходовых товаров и сетевых основ MANVER
  * Автоматически синхронизировано через панель управления MANVER Admin
  */
 
@@ -17,7 +17,15 @@ const PRODUCTS = [
       "3×5 м",
       "3×6 м",
       "4×6 м",
-      "Под заказ"
+      "4×6 м",
+      "4×6 м",
+      "4×6 м",
+      "4×6 м",
+      "4×6 м",
+      "4×6 м",
+      "4×6 м",
+      "4×6 м",
+      "4×6 м"
     ],
     "badge": "Хит продаж",
     "badgeColor": "bg-emerald-700 text-white",
@@ -28,7 +36,7 @@ const PRODUCTS = [
       "#132516"
     ],
     "imageType": "forest_dark",
-    "image": "assets/images/products/prod_forest_dark.jpg"
+    "image": "assets/images/products/upload_20260921_225317_36bf22.jpeg"
   },
   {
     "id": 2,
@@ -54,7 +62,7 @@ const PRODUCTS = [
       "#626B38"
     ],
     "imageType": "moss_olive",
-    "image": "assets/images/products/prod_moss_olive.jpg"
+    "image": "assets/images/products/upload_20260921_225319_2bddae.jpeg"
   },
   {
     "id": 3,
@@ -81,7 +89,7 @@ const PRODUCTS = [
       "#302E24"
     ],
     "imageType": "multicam",
-    "image": "assets/images/products/prod_multicam.jpg"
+    "image": "assets/images/products/upload_20260921_225439_61cc5e.jpeg"
   },
   {
     "id": 4,
@@ -106,7 +114,7 @@ const PRODUCTS = [
       "#1A2514"
     ],
     "imageType": "pixel_emr",
-    "image": "assets/images/products/prod_pixel.jpg"
+    "image": "assets/images/products/upload_20260921_225443_b14452.jpeg"
   },
   {
     "id": 5,
@@ -160,6 +168,56 @@ const PRODUCTS = [
     "image": "assets/images/products/prod_forest_dark.jpg"
   },
   {
+    "id": 7,
+    "name": "Маскировочная сеть «Степь / Пустыня / Песок»",
+    "category": "steppe",
+    "categoryName": "Степь и осень",
+    "pricePerM2": 390,
+    "shading": "75%",
+    "baseType": "Полиамидная дель 1.2 мм",
+    "inStockSizes": [
+      "2×3 м",
+      "3×6 м",
+      "4×8 м",
+      "Под заказ"
+    ],
+    "badge": "В наличии",
+    "badgeColor": "bg-amber-700 text-white",
+    "description": "Песчано-бежевые тона для песчаных карьеров, глинистых почв, пляжных навесов и южных регионов.",
+    "colorPalette": [
+      "#D4C49E",
+      "#B8A57A",
+      "#E4D7B5"
+    ],
+    "imageType": "desert_sand",
+    "image": "assets/images/products/prod_forest_dark.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Маскировочная сеть «Камыш / Болото»",
+    "category": "steppe",
+    "categoryName": "Степь и осень",
+    "pricePerM2": 430,
+    "shading": "80%",
+    "baseType": "Капрон 1.2 мм с пропиткой",
+    "inStockSizes": [
+      "2×3 м",
+      "3×4 м",
+      "3×6 м",
+      "Под заказ"
+    ],
+    "badge": "Для охотников",
+    "badgeColor": "bg-yellow-800 text-white",
+    "description": "Специализированная сеть для маскировки лодок, скрадков и засидок на водоплавающую дичь.",
+    "colorPalette": [
+      "#7D734E",
+      "#5B5A33",
+      "#A89B6E"
+    ],
+    "imageType": "reed_swamp",
+    "image": "assets/images/products/prod_forest_dark.jpg"
+  },
+  {
     "id": 9,
     "name": "Маскировочная сеть «Зима / Чистый снег»",
     "category": "winter",
@@ -186,6 +244,31 @@ const PRODUCTS = [
     "image": "assets/images/products/prod_winter_snow.jpg"
   },
   {
+    "id": 10,
+    "name": "Маскировочная сеть «Зимний лес / Оттепель»",
+    "category": "winter",
+    "categoryName": "Зимние сети",
+    "pricePerM2": 440,
+    "shading": "85%",
+    "baseType": "Капрон 1.4 мм, ячейка 50х50 мм",
+    "inStockSizes": [
+      "3×5 м",
+      "3×6 м",
+      "4×6 м",
+      "Под заказ"
+    ],
+    "badge": "В наличии",
+    "badgeColor": "bg-slate-700 text-white",
+    "description": "Пятнистая черно-бело-серая гамма для заснеженного леса со стволами деревьев и проталинами.",
+    "colorPalette": [
+      "#FFFFFF",
+      "#2F3337",
+      "#8C9297"
+    ],
+    "imageType": "winter_forest",
+    "image": "assets/images/products/prod_winter_forest.jpg"
+  },
+  {
     "id": 11,
     "name": "Маскировочная сеть «Дубовый лес 3D» (Объемная листва)",
     "category": "forest",
@@ -208,6 +291,32 @@ const PRODUCTS = [
       "#1D2817"
     ],
     "imageType": "oak_3d",
+    "image": "assets/images/products/prod_forest_dark.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Сеть для забора и беседки «Комфорт 85%» (Хаки/Олива)",
+    "category": "forest",
+    "categoryName": "Лес и хвоя",
+    "pricePerM2": 380,
+    "shading": "85%",
+    "baseType": "Капроновая сетка + шнур по периметру",
+    "inStockSizes": [
+      "1.5×5 м",
+      "2×5 м",
+      "2×10 м",
+      "2×15 м",
+      "Под заказ"
+    ],
+    "badge": "Для дачи и забора",
+    "badgeColor": "bg-teal-700 text-white",
+    "description": "Специальные размеры под стандартные секции заборов (рабица, 3D-сетка, профнастил). Защита от чужих глаз.",
+    "colorPalette": [
+      "#334D2E",
+      "#48623D",
+      "#22351E"
+    ],
+    "imageType": "fence_shade",
     "image": "assets/images/products/prod_forest_dark.jpg"
   },
   {
@@ -262,6 +371,82 @@ const PRODUCTS = [
     "image": "assets/images/products/prod_forest_dark.jpg"
   },
   {
+    "id": 15,
+    "name": "Маскировочная сеть «Тайга Heavy Duty» (Шнур 6 мм)",
+    "category": "forest",
+    "categoryName": "Лес и хвоя",
+    "pricePerM2": 480,
+    "shading": "85%",
+    "baseType": "Капрон 1.8 мм, шнур 6 мм, усиленные петли",
+    "inStockSizes": [
+      "3×6 м",
+      "4×6 м",
+      "6×6 м",
+      "Под заказ"
+    ],
+    "badge": "Экстра-прочность",
+    "badgeColor": "bg-green-900 text-white",
+    "description": "Сеть с двойной прошивкой и силовой окантовкой для жестких условий эксплуатации и сильных ветров.",
+    "colorPalette": [
+      "#1F331A",
+      "#2E4726",
+      "#142111"
+    ],
+    "imageType": "taiga_heavy",
+    "image": "assets/images/products/prod_forest_dark.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Двусторонняя маскировочная сеть «Лес / Степь 2-в-1»",
+    "category": "tactical",
+    "categoryName": "Тактические и камо",
+    "pricePerM2": 520,
+    "shading": "90%",
+    "baseType": "Двусторонняя сшивка на полиамидной основе",
+    "inStockSizes": [
+      "3×5 м",
+      "3×6 м",
+      "4×6 м",
+      "Под заказ"
+    ],
+    "badge": "2 расцветки в одной",
+    "badgeColor": "bg-orange-800 text-white",
+    "description": "Одна сторона зеленая (хвоя/мох), вторая сторона сухая трава/песок. Достаточно перевернуть полотно при смене сезона.",
+    "colorPalette": [
+      "#2A4222",
+      "#9E8C5B",
+      "#394E2F",
+      "#BAA776"
+    ],
+    "imageType": "double_sided",
+    "image": "assets/images/products/prod_forest_dark.jpg"
+  },
+  {
+    "id": 17,
+    "name": "Антибликовая матовая сеть «Спецназ Матт»",
+    "category": "tactical",
+    "categoryName": "Тактические и камо",
+    "pricePerM2": 540,
+    "shading": "90%",
+    "baseType": "Полиамид 1.8 мм, черный матовый шнур",
+    "inStockSizes": [
+      "2×3 м",
+      "3×6 м",
+      "4×6 м",
+      "Под заказ"
+    ],
+    "badge": "Не шуршит, без блика",
+    "badgeColor": "bg-neutral-900 text-white",
+    "description": "Специальная пропитка против солнечных бликов и ИК-отражения. Повышенная стойкость к истиранию.",
+    "colorPalette": [
+      "#232822",
+      "#31382F",
+      "#1A1D19"
+    ],
+    "imageType": "specnaz_matte",
+    "image": "assets/images/products/prod_forest_dark.jpg"
+  },
+  {
     "id": 18,
     "name": "Основа капроновая узловая 50×50 мм (нить 1.2 мм)",
     "category": "bases",
@@ -306,6 +491,30 @@ const PRODUCTS = [
     ],
     "imageType": "base_heavy",
     "image": "assets/images/products/prod_base_heavy.jpg"
+  },
+  {
+    "id": 20,
+    "name": "Сетевой каркас окантованный (шнур 5-6 мм + петли)",
+    "category": "bases",
+    "categoryName": "Основы для сетей",
+    "pricePerM2": 210,
+    "shading": "Основа с окантовкой",
+    "baseType": "Полиамид 1.4 мм + шнур по периметру с петлями",
+    "inStockSizes": [
+      "3×6 м",
+      "4×6 м",
+      "6×8 м",
+      "Любой размер под ключ"
+    ],
+    "badge": "Готовый каркас",
+    "badgeColor": "bg-purple-800 text-white",
+    "description": "Полностью готовая к оплетению основа с прошитым силовым шнуром по всему периметру и петлями через каждые 50 см.",
+    "colorPalette": [
+      "#1E472A",
+      "#2B633D"
+    ],
+    "imageType": "base_framed",
+    "image": "assets/images/products/prod_forest_dark.jpg"
   }
 ];
 
