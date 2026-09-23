@@ -62,6 +62,11 @@ function applyDynamicContent() {
         el.href = c.telegram;
       });
     }
+    if (c.max) {
+      document.querySelectorAll('a[href*="max.ru"]').forEach(el => {
+        el.href = c.max;
+      });
+    }
   }
 }
 
@@ -84,21 +89,21 @@ function renderProducts() {
   const grid = document.getElementById('productsGrid');
   if (!grid || !window.MANVER_PRODUCTS) return;
 
-  // Строго 12 товаров для лаконичной и ровной сетки 3х4
+  // Строго 12 товаров для лаконичной и ровной сетки 3х4 (по 4 в строке на ПК)
   const productsToRender = window.MANVER_PRODUCTS.slice(0, 12);
 
   grid.innerHTML = productsToRender.map(product => {
     return `
-      <div class="product-card bg-white rounded-2xl border border-stone-200 overflow-hidden flex flex-col justify-between shadow-sm hover:border-emerald-700 transition">
+      <div class="product-card bg-white rounded-2xl sm:rounded-3xl border border-stone-200/90 overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-lg hover:border-emerald-700 transition-all duration-300">
         <div>
-          <!-- Фотография товара / фактуры сети -->
-          <div class="relative h-48 w-full overflow-hidden bg-stone-900 border-b border-stone-100 group">
+          <!-- Фотография товара (увеличенная, сочная) -->
+          <div class="product-card-img-wrap relative w-full overflow-hidden bg-stone-900 border-b border-stone-100 group">
             <img src="${product.image || 'assets/images/camo_weave_detail_hd.jpg'}" 
                  onerror="if(!this.dataset.retried){this.dataset.retried='1';var f=this.src.split('/').pop().split('?')[0];this.src=f;}else if(this.dataset.retried==='1'){this.dataset.retried='2';this.src='assets/images/camo_weave_detail_hd.jpg';}else{this.onerror=null;this.src='camo_weave_detail_hd.jpg';}"
                  alt="${product.name}" 
-                 class="w-full h-full object-cover object-center transition duration-500 group-hover:scale-105"
+                 class="w-full h-full object-cover object-center transition duration-700 ease-out group-hover:scale-105"
                  loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-stone-950/10 to-transparent pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-stone-950/75 via-stone-950/10 to-transparent pointer-events-none"></div>
             
             <span class="absolute top-3 left-3 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-md ${product.badgeColor}">
               ${product.badge}
@@ -108,59 +113,49 @@ function renderProducts() {
             </span>
           </div>
 
-          <!-- Описание и свойства -->
-          <div class="p-5">
-            <h3 class="text-base font-bold text-stone-900 leading-snug mb-2 min-h-[44px]">
+          <!-- Название товара (лаконично, без описания и характеристик) -->
+          <div class="p-4 sm:p-5 pb-1">
+            <h3 class="text-sm sm:text-[15px] font-bold text-stone-900 leading-snug min-h-[42px] line-clamp-2">
               ${product.name}
             </h3>
-            <p class="text-xs text-stone-600 mb-4 line-clamp-2">
-              ${product.description}
-            </p>
-
-            <div class="space-y-2 text-xs text-stone-600 mb-4 bg-stone-50 p-3 rounded-xl border border-stone-100">
-              <div class="flex justify-between">
-                <span class="text-stone-500">Затенение:</span>
-                <span class="font-semibold text-stone-900">${product.shading}</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-stone-500">Основа:</span>
-                <span class="font-semibold text-stone-900 text-right truncate ml-2" title="${product.baseType}">${product.baseType}</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-stone-500">В наличии:</span>
-                <span class="font-semibold text-emerald-800">${product.inStockSizes.slice(0, 3).join(', ')}</span>
-              </div>
-            </div>
           </div>
         </div>
 
-        <!-- Цена и кнопка заказа -->
-        <div class="p-5 pt-0 border-t border-stone-100 mt-2">
-          <div class="flex items-baseline justify-between mb-3 pt-3">
+        <!-- Нижний блок: Стоимость и кнопки (Заказать + Telegram + MAX) -->
+        <div class="p-4 sm:p-5 pt-0">
+          <div class="pt-2.5 pb-3 border-t border-stone-100 flex items-baseline justify-between">
             <div>
-              <span class="text-xs text-stone-500 block">Стоимость:</span>
-              <span class="text-xl font-extrabold text-emerald-950">${product.pricePerM2} ₽</span>
-              <span class="text-xs text-stone-500 font-normal"> / м²</span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">Стоимость:</span>
+              <div class="flex items-baseline gap-1 mt-0.5">
+                <span class="text-xl sm:text-2xl font-black text-[#15432A] tracking-tight">${product.pricePerM2} ₽</span>
+                <span class="text-xs text-stone-500 font-medium">/ м²</span>
+              </div>
             </div>
-            <span class="text-[11px] text-emerald-700 font-medium bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-              Отгрузка 24ч
-            </span>
           </div>
 
-          <div class="grid grid-cols-2 gap-2">
+          <div class="space-y-2">
             <button onclick="openOrderModal('${encodeURIComponent(product.name)}', ${product.pricePerM2})" 
-              class="w-full py-2.5 px-3 rounded-xl bg-emerald-900 hover:bg-emerald-800 text-white font-semibold text-xs transition flex items-center justify-center gap-1">
+              class="w-full py-2.5 px-3 rounded-xl bg-[#15432A] hover:bg-[#1c5535] text-white font-bold text-xs sm:text-[13px] transition shadow-xs hover:shadow flex items-center justify-center gap-1.5 group">
               <span>Заказать</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5"></i>
             </button>
-            <button onclick="sendToTelegramProduct('${encodeURIComponent(product.name)}', ${product.pricePerM2})"
-              class="w-full py-2.5 px-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-900 font-semibold text-xs transition border border-sky-200 flex items-center justify-center gap-1.5" title="Задать вопрос в Telegram">
-              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="12" fill="#24A1DE"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 12c3.4-1.5 5.7-2.5 6.9-3 3.3-1.4 4-1.6 4.5-1.6.1 0 .3 0 .4.1.1.1.2.2.2.4 0 .1 0 .3-.1.5-.2 1.9-1 6.5-1.4 8.6-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.5-1.9-.9-1.1-.7-1.7-1.1-2.7-1.8-1.2-.8-.4-1.2.3-1.9.2-.2 3.2-3 3.3-3.2 0 0 0-.1-.1-.2-.1 0-.2 0-.2 0-.1 0-1.8 1.1-5.1 3.3-.5.3-.9.5-1.3.5-.4 0-1.3-.2-1.9-.4-.8-.2-1.3-.4-1.3-.8 0-.2.3-.4.9-.7z" fill="white"/>
-              </svg>
-              <span>Telegram</span>
-            </button>
+            
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="sendToTelegramProduct('${encodeURIComponent(product.name)}', ${product.pricePerM2})"
+                class="py-2 px-2 rounded-xl bg-sky-50/80 hover:bg-sky-100 text-sky-950 font-bold text-[11px] sm:text-xs transition border border-sky-200/80 flex items-center justify-center gap-1.5 shadow-2xs hover:shadow-xs" title="Написать в Telegram">
+                <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="12" fill="#24A1DE"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 12c3.4-1.5 5.7-2.5 6.9-3 3.3-1.4 4-1.6 4.5-1.6.1 0 .3 0 .4.1.1.1.2.2.2.4 0 .1 0 .3-.1.5-.2 1.9-1 6.5-1.4 8.6-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.5-1.9-.9-1.1-.7-1.7-1.1-2.7-1.8-1.2-.8-.4-1.2.3-1.9.2-.2 3.2-3 3.3-3.2 0 0 0-.1-.1-.2-.1 0-.2 0-.2 0-.1 0-1.8 1.1-5.1 3.3-.5.3-.9.5-1.3.5-.4 0-1.3-.2-1.9-.4-.8-.2-1.3-.4-1.3-.8 0-.2.3-.4.9-.7z" fill="white"/>
+                </svg>
+                <span>Telegram</span>
+              </button>
+              
+              <button onclick="sendToMaxProduct('${encodeURIComponent(product.name)}', ${product.pricePerM2})"
+                class="py-2 px-2 rounded-xl bg-purple-50/80 hover:bg-purple-100 text-purple-950 font-bold text-[11px] sm:text-xs transition border border-purple-200/80 flex items-center justify-center gap-1.5 shadow-2xs hover:shadow-xs" title="Написать в MAX">
+                <img src="assets/images/max_messenger_logo.svg" alt="MAX" class="w-3.5 h-3.5 shrink-0 rounded-[3px]">
+                <span>MAX</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -174,7 +169,7 @@ function renderProducts() {
 // ИНТЕРАКТИВНЫЙ КАЛЬКУЛЯТОР РАЗМЕРА И СТОИМОСТИ (м²)
 // -------------------------------------------------------------
 const CALC_PRICES = {
-  standard_net: 420,
+  standard_net: 280,
   heavy_net: 480,
   double_net: 520,
   base_only: 140,
@@ -222,28 +217,29 @@ function calculateTotal() {
   const width = parseFloat(document.getElementById('calcWidth')?.value) || 0;
   const length = parseFloat(document.getElementById('calcLength')?.value) || 0;
   const typeKey = document.getElementById('calcType')?.value || 'standard_net';
-  const hasEyelets = document.getElementById('calcEyelets')?.checked || false;
 
   const area = Math.round(width * length * 10) / 10;
-  const perimeter = (width + length) * 2;
+  let baseM2Price = CALC_PRICES[typeKey] || 280;
 
-  let baseM2Price = CALC_PRICES[typeKey] || 420;
-  let eyeletsCost = hasEyelets ? perimeter * 15 : 0; // 15 руб за п.м. люверсов
+  // Сумма чисто за метры (люверсы входят в стоимость)
+  let rawTotal = area * baseM2Price;
 
-  let rawTotal = (area * baseM2Price) + eyeletsCost;
-
-  // Прогрессивная система скидок от объема (стимул для заказа)
+  // Система скидок:
+  // - до 90 м²: базовая цена (0%)
+  // - от 90 м²: 5% скидка
+  // - от 180 м² и выше: 10% скидка (на весь объем без ограничений)
   let discountPercent = 0;
-  let discountBadge = 'Розничная цена';
-  if (area >= 100) {
-    discountPercent = 15;
-    discountBadge = 'Крупный опт: скидка 15% + бесплатная доставка';
-  } else if (area >= 40) {
+  let discountBadge = 'Базовая цена';
+
+  if (area >= 180) {
     discountPercent = 10;
-    discountBadge = 'Оптовая цена: скидка 10%';
-  } else if (area >= 18) {
+    discountBadge = 'Скидка 10% (от 180 м²)';
+  } else if (area >= 90) {
     discountPercent = 5;
-    discountBadge = 'Скидка от объема 5%';
+    discountBadge = 'Скидка 5% (от 90 м²)';
+  } else {
+    discountPercent = 0;
+    discountBadge = 'Базовая цена';
   }
 
   const discountAmount = Math.round(rawTotal * (discountPercent / 100));
@@ -270,7 +266,13 @@ function calculateTotal() {
   }
 
   if (leadTimeEl) {
-    leadTimeEl.innerText = area <= 30 ? 'В наличии на складе (отгрузка сегодня)' : 'Изготовление под заказ: 1–2 рабочих дня';
+    if (area >= 100) {
+      leadTimeEl.innerText = 'Оптовая партия: отгрузка со склада за 24 часа';
+    } else if (area <= 30) {
+      leadTimeEl.innerText = 'В наличии на складе (отгрузка сегодня)';
+    } else {
+      leadTimeEl.innerText = 'Изготовление под заказ: 1–2 рабочих дня';
+    }
   }
 }
 
@@ -314,14 +316,53 @@ window.sendCalculatorToTelegram = function() {
   const length = document.getElementById('calcLength')?.value;
   const area = document.getElementById('calcResultArea')?.innerText;
   const total = document.getElementById('calcResultTotal')?.innerText;
+  const discountBadge = document.getElementById('calcDiscountBadge')?.innerText || '';
   const typeSelect = document.getElementById('calcType');
   const typeName = typeSelect ? typeSelect.options[typeSelect.selectedIndex].text : 'Маскировочная сеть';
 
-  const text = `Здравствуйте! Хочу заказать в MANVER:\n• Позиция: ${typeName}\n• Размеры: ${width} × ${length} м (${area})\n• Предварительный расчет калькулятора: ${total}\nПодскажите по наличию и срокам доставки.`;
+  const text = `Здравствуйте! Хочу заказать в MANVER:\n• Позиция: ${typeName}\n• Размеры: ${width} × ${length} м (${area})\n• Предварительный расчет калькулятора: ${total}${discountBadge ? ' (' + discountBadge + ')' : ''}\nПодскажите по наличию и срокам доставки.`;
   const url = `https://t.me/share/url?url=${encodeURIComponent('https://t.me/manver_nets')}&text=${encodeURIComponent(text)}`;
   window.open(url, '_blank');
 };
 window.sendCalculatorToWhatsApp = window.sendCalculatorToTelegram;
+
+// Отправка данных калькулятора в MAX
+window.sendCalculatorToMax = function() {
+  const width = document.getElementById('calcWidth')?.value;
+  const length = document.getElementById('calcLength')?.value;
+  const area = document.getElementById('calcResultArea')?.innerText;
+  const total = document.getElementById('calcResultTotal')?.innerText;
+  const discountBadge = document.getElementById('calcDiscountBadge')?.innerText || '';
+  const typeSelect = document.getElementById('calcType');
+  const typeName = typeSelect ? typeSelect.options[typeSelect.selectedIndex].text : 'Маскировочная сеть';
+
+  const text = `Здравствуйте! Хочу заказать в MANVER:\n• Позиция: ${typeName}\n• Размеры: ${width} × ${length} м (${area})\n• Расчет калькулятора: ${total}${discountBadge ? ' (' + discountBadge + ')' : ''}\nПодскажите наличие и сроки.`;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(() => {});
+  }
+  const maxUrl = (window.MANVER_CONTENT && window.MANVER_CONTENT.contacts && window.MANVER_CONTENT.contacts.max) || 'https://max.ru/u/manver';
+  window.open(maxUrl, '_blank');
+};
+
+// Отправка заявки из модального окна в мессенджеры
+window.sendModalToTelegram = function() {
+  const product = document.getElementById('orderModalProductTitle')?.innerText || 'Маскировочная сеть';
+  const dim = document.querySelector('#orderModal input[name="dimensions"]')?.value;
+  const text = `Здравствуйте! Интересует заказ «${product}»${dim ? ' (' + dim + ')' : ''}. Подскажите наличие нужных размеров и условия доставки.`;
+  const url = `https://t.me/share/url?url=${encodeURIComponent('https://t.me/manver_nets')}&text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+};
+
+window.sendModalToMax = function() {
+  const product = document.getElementById('orderModalProductTitle')?.innerText || 'Маскировочная сеть';
+  const dim = document.querySelector('#orderModal input[name="dimensions"]')?.value;
+  const text = `Здравствуйте! Интересует заказ «${product}»${dim ? ' (' + dim + ')' : ''}.`;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(() => {});
+  }
+  const maxUrl = (window.MANVER_CONTENT && window.MANVER_CONTENT.contacts && window.MANVER_CONTENT.contacts.max) || 'https://max.ru/u/manver';
+  window.open(maxUrl, '_blank');
+};
 
 // -------------------------------------------------------------
 // МОДАЛЬНЫЕ ОКНА И ЗАКАЗ В 1 КЛИК
@@ -384,6 +425,13 @@ window.sendToTelegramProduct = function(nameEncoded, price) {
   window.open(url, '_blank');
 };
 window.sendToWhatsAppProduct = window.sendToTelegramProduct;
+
+// Отправка в MAX по товару
+window.sendToMaxProduct = function(nameEncoded, price) {
+  const name = decodeURIComponent(nameEncoded);
+  const maxUrl = (window.MANVER_CONTENT && window.MANVER_CONTENT.contacts && window.MANVER_CONTENT.contacts.max) || 'https://max.ru/u/manver';
+  window.open(maxUrl, '_blank');
+};
 
 // -------------------------------------------------------------
 // МАСКА НОМЕРА ТЕЛЕФОНА +7 (XXX) XXX-XX-XX
