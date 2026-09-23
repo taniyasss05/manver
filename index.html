@@ -53,7 +53,7 @@
       <!-- Правый блок: Контакты оптового отдела + Telegram + Вторичная кнопка «Заказать звонок» -->
       <div class="flex items-center gap-3 sm:gap-4 lg:gap-5 shrink-0">
         
-        <!-- Оптовый отдел + Телефон + Telegram в единой чистой связке -->
+        <!-- Оптовый отдел + Телефон + Telegram + MAX в единой чистой связке -->
         <div class="hidden sm:flex flex-col items-end text-right">
           <span class="text-[10px] uppercase tracking-wider text-stone-400 font-bold block leading-none mb-1">
             Оптовый отдел
@@ -62,12 +62,17 @@
             <a href="tel:+74952753095" class="text-base lg:text-[17px] font-extrabold text-stone-950 hover:text-[#15432A] transition tracking-tight whitespace-nowrap leading-none">
               +7 (495) 275-30-95
             </a>
-            <a href="https://t.me/manver_nets" target="_blank" title="Написать в Telegram" class="inline-flex items-center justify-center w-6 h-6 shrink-0 rounded-full hover:scale-110 transition shadow-2xs" aria-label="Telegram">
-              <svg class="w-6 h-6 shrink-0" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="12" fill="#24A1DE"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 12c3.4-1.5 5.7-2.5 6.9-3 3.3-1.4 4-1.6 4.5-1.6.1 0 .3 0 .4.1.1.1.2.2.2.4 0 .1 0 .3-.1.5-.2 1.9-1 6.5-1.4 8.6-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.5-1.9-.9-1.1-.7-1.7-1.1-2.7-1.8-1.2-.8-.4-1.2.3-1.9.2-.2 3.2-3 3.3-3.2 0 0 0-.1-.1-.2-.1 0-.2 0-.2 0-.1 0-1.8 1.1-5.1 3.3-.5.3-.9.5-1.3.5-.4 0-1.3-.2-1.9-.4-.8-.2-1.3-.4-1.3-.8 0-.2.3-.4.9-.7z" fill="white"/>
-              </svg>
-            </a>
+            <div class="flex items-center gap-1.5 shrink-0 pl-0.5">
+              <a href="https://t.me/manver_nets" target="_blank" title="Написать в Telegram" class="inline-flex items-center justify-center w-6 h-6 shrink-0 rounded-full hover:scale-110 transition shadow-2xs" aria-label="Telegram">
+                <svg class="w-6 h-6 shrink-0" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="12" fill="#24A1DE"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 12c3.4-1.5 5.7-2.5 6.9-3 3.3-1.4 4-1.6 4.5-1.6.1 0 .3 0 .4.1.1.1.2.2.2.4 0 .1 0 .3-.1.5-.2 1.9-1 6.5-1.4 8.6-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.5-1.9-.9-1.1-.7-1.7-1.1-2.7-1.8-1.2-.8-.4-1.2.3-1.9.2-.2 3.2-3 3.3-3.2 0 0 0-.1-.1-.2-.1 0-.2 0-.2 0-.1 0-1.8 1.1-5.1 3.3-.5.3-.9.5-1.3.5-.4 0-1.3-.2-1.9-.4-.8-.2-1.3-.4-1.3-.8 0-.2.3-.4.9-.7z" fill="white"/>
+                </svg>
+              </a>
+              <a href="https://max.ru/u/manver" target="_blank" title="Написать в MAX" class="inline-flex items-center justify-center w-6 h-6 shrink-0 rounded-md hover:scale-110 transition shadow-2xs overflow-hidden" aria-label="MAX">
+                <img src="assets/images/max_messenger_logo.svg" alt="MAX" class="w-6 h-6 rounded-md shrink-0">
+              </a>
+            </div>
           </div>
         </div>
 
@@ -76,15 +81,18 @@
           <span>Заказать звонок</span>
         </button>
 
-        <!-- Мобильные кнопки быстрого звонка и мессенджера (только для компактных экранов < 640px) -->
+        <!-- Мобильные кнопки быстрого звонка и мессенджеров (только для компактных экранов < 640px) -->
         <div class="flex items-center gap-1.5 sm:hidden shrink-0">
-          <a href="https://t.me/manver_nets" target="_blank" class="w-8 h-8 shrink-0 rounded-full flex items-center justify-center shadow-xs hover:scale-105 transition" aria-label="Telegram">
+          <a href="https://t.me/manver_nets" target="_blank" class="w-8 h-8 shrink-0 rounded-full flex items-center justify-center shadow-xs hover:scale-105 transition" aria-label="Telegram" title="Telegram">
             <svg class="w-8 h-8 shrink-0" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="12" cy="12" r="12" fill="#24A1DE"/>
               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 12c3.4-1.5 5.7-2.5 6.9-3 3.3-1.4 4-1.6 4.5-1.6.1 0 .3 0 .4.1.1.1.2.2.2.4 0 .1 0 .3-.1.5-.2 1.9-1 6.5-1.4 8.6-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.5-1.9-.9-1.1-.7-1.7-1.1-2.7-1.8-1.2-.8-.4-1.2.3-1.9.2-.2 3.2-3 3.3-3.2 0 0 0-.1-.1-.2-.1 0-.2 0-.2 0-.1 0-1.8 1.1-5.1 3.3-.5.3-.9.5-1.3.5-.4 0-1.3-.2-1.9-.4-.8-.2-1.3-.4-1.3-.8 0-.2.3-.4.9-.7z" fill="white"/>
             </svg>
           </a>
-          <a href="tel:+74952753095" class="p-2 shrink-0 rounded-xl text-emerald-900 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 transition flex items-center justify-center" aria-label="Позвонить">
+          <a href="https://max.ru/u/manver" target="_blank" class="w-8 h-8 shrink-0 rounded-lg flex items-center justify-center shadow-xs hover:scale-105 transition overflow-hidden" aria-label="MAX" title="MAX">
+            <img src="assets/images/max_messenger_logo.svg" alt="MAX" class="w-8 h-8 rounded-lg shrink-0">
+          </a>
+          <a href="tel:+74952753095" class="w-8 h-8 shrink-0 rounded-lg text-emerald-900 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 transition flex items-center justify-center" aria-label="Позвонить" title="Позвонить">
             <i data-lucide="phone" class="w-4 h-4"></i>
           </a>
         </div>
@@ -102,10 +110,11 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-6">
         
         <!-- Меню навигации (спокойное, равномерное, строго в едином стиле) -->
-        <nav class="flex items-center gap-7 xl:gap-8 text-[13.5px] xl:text-[14px] font-medium text-stone-600 whitespace-nowrap">
+        <nav class="flex items-center gap-6 xl:gap-7 text-[13.5px] xl:text-[14px] font-medium text-stone-600 whitespace-nowrap">
           <a href="#catalog" class="hover:text-stone-950 hover:font-semibold transition py-1">Продукция</a>
           <a href="#solutions" class="hover:text-stone-950 hover:font-semibold transition py-1">Оптовым клиентам</a>
           <a href="#quality" class="hover:text-stone-950 hover:font-semibold transition py-1">Производство</a>
+          <a href="#sizes" class="hover:text-stone-950 hover:font-semibold transition py-1">Размеры</a>
           <a href="#calculator" class="hover:text-stone-950 hover:font-semibold transition py-1">Калькулятор</a>
           <a href="#contacts" class="hover:text-stone-950 hover:font-semibold transition py-1">Контакты</a>
         </nav>
@@ -124,6 +133,7 @@
       <a href="#catalog" class="block py-2.5 text-stone-800 font-semibold border-b border-stone-100">Продукция</a>
       <a href="#solutions" class="block py-2.5 text-stone-800 font-semibold border-b border-stone-100">Оптовым клиентам</a>
       <a href="#quality" class="block py-2.5 text-stone-800 font-semibold border-b border-stone-100">Производство</a>
+      <a href="#sizes" class="block py-2.5 text-stone-800 font-semibold border-b border-stone-100">24 типоразмера</a>
       <a href="#calculator" class="block py-2.5 text-stone-800 font-semibold border-b border-stone-100">Калькулятор заказа</a>
       <a href="#contacts" class="block py-2.5 text-stone-800 font-semibold">Контакты</a>
       <div class="pt-3 border-t border-stone-200 flex flex-col gap-2.5">
@@ -131,7 +141,20 @@
           <i data-lucide="calculator" class="w-4 h-4 text-emerald-300"></i>
           <span>Рассчитать заказ</span>
         </a>
-        <button onclick="openCallModal()" class="w-full py-3 rounded-xl border border-stone-300 font-semibold text-sm text-stone-800 hover:bg-stone-50 flex items-center justify-center gap-2">
+        <div class="grid grid-cols-2 gap-2">
+          <a href="https://t.me/manver_nets" target="_blank" class="py-2.5 px-3 rounded-xl btn-telegram font-bold text-xs flex items-center justify-center gap-2 shadow-2xs">
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="12" fill="#24A1DE"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 12c3.4-1.5 5.7-2.5 6.9-3 3.3-1.4 4-1.6 4.5-1.6.1 0 .3 0 .4.1.1.1.2.2.2.4 0 .1 0 .3-.1.5-.2 1.9-1 6.5-1.4 8.6-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.5-1.9-.9-1.1-.7-1.7-1.1-2.7-1.8-1.2-.8-.4-1.2.3-1.9.2-.2 3.2-3 3.3-3.2 0 0 0-.1-.1-.2-.1 0-.2 0-.2 0-.1 0-1.8 1.1-5.1 3.3-.5.3-.9.5-1.3.5-.4 0-1.3-.2-1.9-.4-.8-.2-1.3-.4-1.3-.8 0-.2.3-.4.9-.7z" fill="white"/>
+            </svg>
+            <span>Telegram</span>
+          </a>
+          <a href="https://max.ru/u/manver" target="_blank" class="py-2.5 px-3 rounded-xl btn-max font-bold text-xs flex items-center justify-center gap-2 shadow-2xs">
+            <img src="assets/images/max_messenger_logo.svg" alt="MAX" class="w-4 h-4 rounded-[3px] shrink-0">
+            <span>MAX</span>
+          </a>
+        </div>
+        <button onclick="openCallModal()" class="w-full py-2.5 rounded-xl border border-stone-300 font-semibold text-xs text-stone-800 hover:bg-stone-50 flex items-center justify-center gap-2">
           <span>Заказать обратный звонок</span>
         </button>
       </div>
@@ -141,10 +164,13 @@
   <!-- ============================================================ -->
   <!-- ПЕРВЫЙ ЭКРАН (HERO SECTION) — СИММЕТРИЧНЫЙ БАННЕР В СЕТКЕ САЙТА -->
   <!-- ============================================================ -->
-  <section class="relative bg-white py-4 sm:py-6 lg:py-7 overflow-hidden">
+  <!-- ============================================================ -->
+  <!-- ПЕРВЫЙ ЭКРАН (HERO SECTION) — КАРТОЧКА-БАННЕР В СЕТКЕ САЙТА -->
+  <!-- ============================================================ -->
+  <section class="relative bg-white py-0 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Карточка-баннер со скруглением 16px, точно по сетке сайта (симметрично шапке и нижним блокам) -->
+      <!-- Карточка-баннер -->
       <div class="hero-banner-card">
         
         <!-- Правая часть: Фотография маскировочной сети с плавным растворением в фон -->
@@ -156,8 +182,7 @@
           <div class="hero-image-overlay"></div>
         </div>
 
-        <!-- Контентная часть (Текст и кнопки) -->
-        <div class="hero-text-wrap p-6 sm:p-10 lg:p-12 xl:p-14 space-y-5 sm:space-y-6">
+        <div class="hero-text-wrap space-y-4 sm:space-y-5">
           
           <div class="text-xs font-bold tracking-wider text-stone-500 uppercase flex items-center gap-2">
             <span class="text-stone-900 font-black">MANVER</span>
@@ -171,8 +196,8 @@
           </h1>
 
           <p class="text-sm sm:text-base lg:text-lg text-stone-600 leading-relaxed max-w-lg font-medium">
-            Изготавливаем вручную под ваши размеры. <br class="hidden sm:inline">
-            Для складов, крупных объектов и специальных задач.
+            Изготавливаем вручную под ваши размеры. <br>
+            Для складов, крупных объектов <br class="sm:hidden">и специальных задач.
           </p>
 
           <!-- Кнопки: главное действие — заявка на расчет -->
@@ -194,7 +219,6 @@
         </div>
 
       </div>
-
     </div>
   </section>
 
@@ -247,7 +271,7 @@
   <!-- ============================================================ -->
   <!-- РЕШЕНИЯ ПОД ВАШУ ЗАДАЧУ (ОТ ОДНОГО ПОЛОТНА ДО КРУПНОГО ОБЪЕКТА) -->
   <!-- ============================================================ -->
-  <section id="solutions" class="py-14 bg-white">
+  <section id="solutions" class="landing-section bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="mb-8">
@@ -359,10 +383,10 @@
   <!-- ============================================================ -->
   <!-- КАЧЕСТВО НАЧИНАЕТСЯ С РУЧНОЙ РАБОТЫ (НОВЫЙ НАСЫЩЕННЫЙ БЛОК) -->
   <!-- ============================================================ -->
-  <section id="quality" class="py-16 sm:py-20 bg-stone-50 border-t border-stone-200">
+  <section id="quality" class="landing-section bg-stone-50 border-t border-stone-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-stone-200 shadow-sm">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-stone-200 shadow-sm">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           <!-- Левая часть: Крупное, чистое фото девушки за плетением (без надписей) -->
@@ -376,12 +400,12 @@
               <!-- Плашка на фото -->
               <div class="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 bg-white/95 backdrop-blur-md p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-white/40 shadow-lg">
                 <div class="flex items-center gap-2.5 sm:gap-3">
-                  <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#15432A] text-white flex items-center justify-center shrink-0 shadow-sm">
-                    <i data-lucide="sparkles" class="w-4 h-4 sm:w-5 sm:h-5 text-emerald-300"></i>
+                  <div class="quality-craft-icon">
+                    <i data-lucide="badge-check" class="w-5 h-5 text-emerald-300"></i>
                   </div>
                   <div class="min-w-0 flex-1">
-                    <span class="text-[11px] sm:text-xs font-black text-stone-950 uppercase tracking-wider block truncate sm:whitespace-normal">Ручное вплетение каждой ленты</span>
-                    <span class="text-[10px] sm:text-[11px] font-medium text-stone-600 block mt-0.5 leading-snug">Двойная фиксация узлов — полотно не осыпается</span>
+                    <span class="text-[11px] sm:text-xs font-black text-stone-950 uppercase tracking-wide block leading-snug whitespace-normal">Ручное вплетение каждой ленты</span>
+                    <span class="text-[10px] sm:text-[11px] font-medium text-stone-600 block mt-0.5 leading-snug">Двойная фиксация узлов — стойкость к ветровым нагрузкам</span>
                   </div>
                 </div>
               </div>
@@ -467,7 +491,7 @@
   <!-- ============================================================ -->
   <!-- ПРОЧНАЯ ОСНОВА. ТОЧНЫЙ РАЗМЕР (ПОДТВЕРЖДЕННЫЕ ХАРАКТЕРИСТИКИ) -->
   <!-- ============================================================ -->
-  <section id="bases" class="py-16 sm:py-20 lg:py-24 bg-stone-50 border-y border-stone-200/90">
+  <section id="bases" class="landing-section bg-stone-50 border-t border-stone-200/90">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -486,7 +510,7 @@
 
               <!-- Подпись внизу карточки -->
               <div class="absolute bottom-3 left-3 right-3">
-                <div class="bg-stone-900/90 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-white/15 text-white shadow-lg flex items-center justify-between gap-2">
+                <div class="macro-overlay-card bg-stone-900/90 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-white/15 text-white shadow-lg flex items-center justify-between gap-2">
                   <div class="space-y-0.5">
                     <div class="font-extrabold text-sm sm:text-[15px] text-white leading-snug">
                       Ячейка 50×50 мм
@@ -503,28 +527,28 @@
             </div>
           </div>
 
-          <!-- Карточка 2: Фотография с окантовкой и узлом (Термофиксация узлов) -->
+          <!-- Карточка 2: Фотография с окантовкой и узлом (Надёжная окантовка дели) -->
           <div class="group relative rounded-2xl sm:rounded-3xl overflow-hidden border border-stone-300/80 shadow-md bg-stone-950 transition-all duration-300 hover:shadow-xl">
             <div class="macro-card-img-wrap">
               <img src="assets/images/cord_border_macro.jpg" 
                    onerror="this.onerror=null; this.src='cord_border_macro.jpg';"
-                   alt="Термофиксация узлов: надёжная фиксация плетения" 
+                   alt="Надёжная окантовка дели по периметру капроновым шнуром" 
                    class="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105">
               <div class="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/20 to-transparent pointer-events-none"></div>
 
               <!-- Подпись внизу карточки -->
               <div class="absolute bottom-3 left-3 right-3">
-                <div class="bg-stone-900/90 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-white/15 text-white shadow-lg flex items-center justify-between gap-2">
+                <div class="macro-overlay-card bg-stone-900/90 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-white/15 text-white shadow-lg flex items-center justify-between gap-2">
                   <div class="space-y-0.5">
                     <div class="font-extrabold text-sm sm:text-[15px] text-white leading-snug">
-                      Термофиксация узлов
+                      Надёжная окантовка дели
                     </div>
                     <div class="text-[11px] text-stone-300 font-medium leading-normal">
-                      Надёжная фиксация плетения
+                      По периметру капроновым шнуром
                     </div>
                   </div>
-                  <span class="w-7 h-7 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 flex items-center justify-center shrink-0" title="Термофиксация узлов">
-                    <i data-lucide="flame" class="w-3.5 h-3.5"></i>
+                  <span class="w-7 h-7 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 flex items-center justify-center shrink-0" title="Надёжная окантовка дели по периметру">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
                   </span>
                 </div>
               </div>
@@ -588,24 +612,315 @@
             </span>
           </div>
 
-          <!-- Размеры с переходом в калькулятор -->
-          <div class="pt-2 border-t border-stone-200/80">
-            <span class="text-xs font-bold text-stone-600 block mb-2.5">
-              Стандартные размеры полотен:
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- СКЛАДСКАЯ ПРОГРАММА: 24 СТАНДАРТНЫХ ТИПОРАЗМЕРА MANVER -->
+  <!-- ============================================================ -->
+  <section id="sizes" class="landing-section bg-gradient-to-b from-[#FBFBFA] via-white to-[#F8F9F8] border-t border-stone-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Заголовок блока -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 gap-4">
+        <div>
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-[#15432A] text-xs font-bold uppercase tracking-wider mb-3 shadow-2xs">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
             </span>
-            <div class="flex flex-wrap gap-2 text-xs font-semibold text-stone-800">
-              <button type="button" onclick="selectCalcSize(1.5, 5)" class="bg-white hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-900 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-stone-300 shadow-2xs whitespace-nowrap transition cursor-pointer">1,5×5 м</button>
-              <button type="button" onclick="selectCalcSize(2, 5)" class="bg-white hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-900 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-stone-300 shadow-2xs whitespace-nowrap transition cursor-pointer">2×5 м</button>
-              <button type="button" onclick="selectCalcSize(3, 3)" class="bg-white hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-900 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-stone-300 shadow-2xs whitespace-nowrap transition cursor-pointer">3×3 м</button>
-              <button type="button" onclick="selectCalcSize(3, 5)" class="bg-white hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-900 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-stone-300 shadow-2xs whitespace-nowrap transition cursor-pointer">3×5 м</button>
-              <button type="button" onclick="selectCalcSize(6, 6)" class="bg-white hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-900 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-stone-300 shadow-2xs whitespace-nowrap transition cursor-pointer">6×6 м</button>
-              <button type="button" onclick="selectCalcSize(9, 12)" class="bg-white hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-900 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-stone-300 shadow-2xs whitespace-nowrap transition cursor-pointer">9×12 м</button>
-              <button type="button" onclick="selectCalcSize(12, 18)" class="bg-white hover:bg-emerald-50 hover:border-emerald-500 hover:text-emerald-900 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-stone-300 shadow-2xs whitespace-nowrap transition cursor-pointer">12×18 м</button>
-              <a href="#calculator" class="inline-flex items-center justify-center gap-1.5 bg-[#15432A] hover:bg-[#0F3B25] text-white px-3.5 py-1.5 sm:py-2 rounded-xl font-bold shadow-sm transition active:scale-95 whitespace-nowrap">
-                <span>Любой размер под заказ</span>
-                <span class="text-emerald-300 font-bold">→</span>
-              </a>
+            Складская программа мануфактуры
+          </span>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-stone-950 tracking-tight">
+            24 стандартных типоразмера в постоянном наличии
+          </h2>
+          <p class="text-sm sm:text-base text-stone-600 mt-2 max-w-2xl leading-relaxed">
+            Постоянный складской резерв готовой продукции. Выберите нужный размер для мгновенного расчёта в калькуляторе или оформите экспресс-отгрузку за 24 часа.
+          </p>
+        </div>
+
+        <a href="#calculator" class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-emerald-900 hover:text-emerald-700 hover:underline shrink-0 pb-1">
+          <span>Рассчитать нестандартный размер</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <!-- Главная карточка: Матрица 24 размеров и экспресс-отгрузка 24ч -->
+      <div class="bg-gradient-to-b from-stone-50 via-white to-stone-50/70 rounded-3xl p-5 sm:p-7 lg:p-9 border border-stone-200/90 shadow-lg shadow-stone-200/40">
+        
+        <!-- Сетка 6 колонок по ширине -->
+        <div class="sizes-grid-layout">
+          
+          <!-- Колонка 1: Ширина 1,5 м -->
+          <div class="size-column-card">
+            <div>
+              <div class="col-header">
+                <span class="col-title">Ширина 1,5 м</span>
+              </div>
+              <div class="space-y-2">
+                <button type="button" onclick="selectCalcSize(1.5, 3)" class="size-pill-btn group">
+                  <span class="size-pill-name">1,5 × 3 м</span>
+                  <span class="size-pill-area">4,5 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(1.5, 5)" class="size-pill-btn group">
+                  <span class="size-pill-name">1,5 × 5 м</span>
+                  <span class="size-pill-area">7,5 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(1.5, 6)" class="size-pill-btn group">
+                  <span class="size-pill-name">1,5 × 6 м</span>
+                  <span class="size-pill-area">9 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(1.5, 10)" class="size-pill-btn group">
+                  <span class="size-pill-name">1,5 × 10 м</span>
+                  <span class="size-pill-area">15 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(1.5, 12)" class="size-pill-btn group">
+                  <span class="size-pill-name">1,5 × 12 м</span>
+                  <span class="size-pill-area">18 м²</span>
+                </button>
+              </div>
             </div>
+            <div class="mt-3 pt-2 border-t border-stone-100 text-[11px] text-stone-500 font-medium text-center">
+              Заборы и ограждения
+            </div>
+          </div>
+
+          <!-- Колонка 2: Ширина 2 м -->
+          <div class="size-column-card">
+            <div>
+              <div class="col-header">
+                <span class="col-title">Ширина 2 м</span>
+              </div>
+              <div class="space-y-2">
+                <button type="button" onclick="selectCalcSize(2, 3)" class="size-pill-btn group">
+                  <span class="size-pill-name">2 × 3 м</span>
+                  <span class="size-pill-area">6 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(2, 5)" class="size-pill-btn group">
+                  <span class="size-pill-name">2 × 5 м</span>
+                  <span class="size-pill-area">10 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(2, 6)" class="size-pill-btn group">
+                  <span class="size-pill-name">2 × 6 м</span>
+                  <span class="size-pill-area">12 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(2, 10)" class="size-pill-btn group">
+                  <span class="size-pill-name">2 × 10 м</span>
+                  <span class="size-pill-area">20 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(2, 12)" class="size-pill-btn group">
+                  <span class="size-pill-name">2 × 12 м</span>
+                  <span class="size-pill-area">24 м²</span>
+                </button>
+              </div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-stone-100 text-[11px] text-stone-500 font-medium text-center">
+              Беседки и веранды
+            </div>
+          </div>
+
+          <!-- Колонка 3: Ширина 3 м -->
+          <div class="size-column-card">
+            <div>
+              <div class="col-header">
+                <span class="col-title">Ширина 3 м</span>
+              </div>
+              <div class="space-y-2">
+                <button type="button" onclick="selectCalcSize(3, 3)" class="size-pill-btn group">
+                  <span class="size-pill-name">3 × 3 м</span>
+                  <span class="size-pill-area">9 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(3, 4)" class="size-pill-btn group">
+                  <span class="size-pill-name">3 × 4 м</span>
+                  <span class="size-pill-area">12 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(3, 5)" class="size-pill-btn group">
+                  <span class="size-pill-name">3 × 5 м</span>
+                  <span class="size-pill-area">15 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(3, 6)" class="size-pill-btn group">
+                  <span class="size-pill-name">3 × 6 м</span>
+                  <span class="size-pill-area">18 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(3, 10)" class="size-pill-btn group">
+                  <span class="size-pill-name">3 × 10 м</span>
+                  <span class="size-pill-area">30 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(3, 12)" class="size-pill-btn group">
+                  <span class="size-pill-name">3 × 12 м</span>
+                  <span class="size-pill-area">36 м²</span>
+                </button>
+              </div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-stone-100 text-[11px] text-stone-500 font-medium text-center">
+              Универсальные навесы
+            </div>
+          </div>
+
+          <!-- Колонка 4: Ширина 4 м -->
+          <div class="size-column-card">
+            <div>
+              <div class="col-header">
+                <span class="col-title">Ширина 4 м</span>
+              </div>
+              <div class="space-y-2">
+                <button type="button" onclick="selectCalcSize(4, 6)" class="size-pill-btn group">
+                  <span class="size-pill-name">4 × 6 м</span>
+                  <span class="size-pill-area">24 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(4, 10)" class="size-pill-btn group">
+                  <span class="size-pill-name">4 × 10 м</span>
+                  <span class="size-pill-area">40 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(4, 12)" class="size-pill-btn group">
+                  <span class="size-pill-name">4 × 12 м</span>
+                  <span class="size-pill-area">48 м²</span>
+                </button>
+              </div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-stone-100 text-[11px] text-stone-500 font-medium text-center">
+              Ангары и террасы
+            </div>
+          </div>
+
+          <!-- Колонка 5: Ширина 6 м -->
+          <div class="size-column-card">
+            <div>
+              <div class="col-header">
+                <span class="col-title">Ширина 6 м</span>
+              </div>
+              <div class="space-y-2">
+                <button type="button" onclick="selectCalcSize(6, 6)" class="size-pill-btn group">
+                  <span class="size-pill-name">6 × 6 м</span>
+                  <span class="size-pill-area">36 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(6, 9)" class="size-pill-btn group">
+                  <span class="size-pill-name">6 × 9 м</span>
+                  <span class="size-pill-area">54 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(6, 12)" class="size-pill-btn group">
+                  <span class="size-pill-name">6 × 12 м</span>
+                  <span class="size-pill-area">72 м²</span>
+                </button>
+              </div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-stone-100 text-[11px] text-stone-500 font-medium text-center">
+              Техника и стоянки
+            </div>
+          </div>
+
+          <!-- Колонка 6: Крупные форматы (9м и 12м) -->
+          <div class="column-large-sizes">
+            <div>
+              <div class="col-large-header">
+                <span class="col-large-title">Ширина 9 и 12 м</span>
+              </div>
+              <div class="space-y-2">
+                <button type="button" onclick="selectCalcSize(9, 12)" class="large-size-btn group">
+                  <span class="size-pill-name">9 × 12 м</span>
+                  <span class="size-pill-area">108 м²</span>
+                </button>
+                <button type="button" onclick="selectCalcSize(12, 18)" class="large-size-btn group">
+                  <span class="size-pill-name">12 × 18 м</span>
+                  <span class="size-pill-area">216 м²</span>
+                </button>
+              </div>
+            </div>
+            <div class="col-large-footer">
+              Сверхширокие форматы
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Экспресс-отгрузка за 24 часа: Премиальный блок гарантии -->
+        <div class="banner-24h">
+          
+          <div class="banner-24h-row">
+            
+            <!-- Левая колонка: Текст гарантии и преимущества -->
+            <div class="banner-24h-col-text">
+              <div class="banner-24h-badge">
+                <span class="banner-pulse-dot"></span>
+                <span>Складской резерв готовой продукции</span>
+              </div>
+
+              <h3 class="banner-24h-title">
+                Закажите любой из 24 стандартных размеров — отгрузим за 24 часа
+              </h3>
+
+              <p class="banner-24h-desc">
+                Все 24 типоразмера из каталога выше изготовлены заранее, навязаны на полиамидную дель 50×50 мм, окантованы шнуром 4–5 мм с петлями крепления и хранятся на складе в МО. При заказе стандартного размера отгрузка и передача в доставку осуществляются в течение <strong>24 часов</strong>.
+              </p>
+
+              <!-- 3 ключевых тезиса -->
+              <div class="banner-perks-grid">
+                <div class="banner-perk-item">
+                  <div class="banner-perk-icon">
+                    <i data-lucide="zap" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <div class="banner-perk-title">Отгрузка за 24 часа</div>
+                    <div class="banner-perk-sub">Гарантированная отправка без ожидания производства</div>
+                  </div>
+                </div>
+
+                <div class="banner-perk-item">
+                  <div class="banner-perk-icon">
+                    <i data-lucide="package-check" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <div class="banner-perk-title">100% готовность</div>
+                    <div class="banner-perk-sub">Шнур, окантовка и петли уже смонтированы</div>
+                  </div>
+                </div>
+
+                <div class="banner-perk-item">
+                  <div class="banner-perk-icon">
+                    <i data-lucide="truck" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <div class="banner-perk-title">Доставка по РФ</div>
+                    <div class="banner-perk-sub">Курьер МСК/МО и отправка ТК СДЭК, Деловые Линии</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Кнопки действий -->
+              <div class="banner-actions">
+                <a href="#calculator" class="banner-btn-calc">
+                  <i data-lucide="calculator" class="w-4 h-4 text-emerald-800"></i>
+                  <span>Рассчитать размер в калькуляторе</span>
+                </a>
+                <a href="#calculator" class="banner-btn-order">
+                  <i data-lucide="scissors" class="w-4 h-4 text-emerald-300"></i>
+                  <span>Пошив нестандартного размера</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Правая колонка: Реальное фото рулона MANVER со склада -->
+            <div class="banner-24h-col-media">
+              <div class="banner-photo-card group">
+                <img src="assets/images/camo_roll_manver.jpg" 
+                     alt="Маскировочные сети MANVER на складе готовой продукции" 
+                     class="banner-photo-img">
+                <div class="banner-photo-overlay">
+                  <span class="banner-photo-badge">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                    Складской запас MANVER
+                  </span>
+                  <span class="banner-photo-title">
+                    24 размера упакованы и готовы к отправке
+                  </span>
+                </div>
+              </div>
+            </div>
+
           </div>
 
         </div>
@@ -618,7 +933,7 @@
   <!-- ============================================================ -->
   <!-- ВИТРИНА: 12 ХОДОВЫХ ТОВАРОВ И ОСНОВ В НАЛИЧИИ -->
   <!-- ============================================================ -->
-  <section id="catalog" class="py-14 bg-white">
+  <section id="catalog" class="landing-section bg-white border-t border-stone-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
@@ -648,7 +963,7 @@
   <!-- ============================================================ -->
   <!-- ИНТЕРАКТИВНЫЙ КАЛЬКУЛЯТОР РАЗМЕРА И СТОИМОСТИ (М²) -->
   <!-- ============================================================ -->
-  <section id="calculator" class="py-14 bg-stone-50 border-t border-stone-200">
+  <section id="calculator" class="landing-section bg-stone-50 border-t border-stone-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-xl mx-auto mb-10">
@@ -668,7 +983,7 @@
           <div>
             <label for="calcType" class="block text-xs font-bold text-stone-700 mb-2">Выберите тип полотна / основы:</label>
             <select id="calcType" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2.5 text-xs text-stone-900 focus:outline-none focus:border-emerald-800">
-              <option value="standard_net">Маскировочная сеть на капроне — от 420 ₽/м²</option>
+              <option value="standard_net">Маскировочная сеть на капроне — от 280 ₽/м²</option>
               <option value="heavy_net">Усиленная маскировочная сеть 3D — от 480 ₽/м²</option>
               <option value="double_net">Двусторонняя маскировочная сеть — от 520 ₽/м²</option>
               <option value="base_only">Основа полиамидная 50×50 мм (дель) — от 140 ₽/м²</option>
@@ -698,7 +1013,7 @@
 
           <label class="flex items-center gap-2.5 text-xs text-stone-700 cursor-pointer pt-2 border-t border-stone-100">
             <input id="calcEyelets" type="checkbox" checked class="rounded text-emerald-800 focus:ring-0">
-            <span>Люверсы/петли для крепления по периметру</span>
+            <span>Люверсы/петли для крепления по периметру (входят в стоимость)</span>
           </label>
         </div>
 
@@ -706,8 +1021,8 @@
         <div class="lg:col-span-5 bg-white rounded-2xl p-6 border border-stone-200 shadow-sm space-y-4">
           <div class="flex justify-between items-center">
             <span class="text-xs font-bold text-stone-500 uppercase">Расчет заказа</span>
-            <span id="calcDiscountBadge" class="text-xs font-semibold px-2 py-0.5 rounded bg-stone-100 text-stone-700">
-              Розничная цена
+            <span id="calcDiscountBadge" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-stone-100 text-stone-700 border border-stone-200">
+              Базовая цена
             </span>
           </div>
 
@@ -718,15 +1033,14 @@
             </div>
             <div class="bg-stone-50 p-3 rounded-xl border border-stone-100">
               <span class="text-[11px] text-stone-500 block">Цена за метр:</span>
-              <span id="calcResultPriceM2" class="text-xl font-bold text-stone-900">420 ₽/м²</span>
+              <span id="calcResultPriceM2" class="text-xl font-bold text-stone-900">280 ₽/м²</span>
             </div>
           </div>
 
           <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl">
-            <span class="text-xs text-emerald-800 font-semibold block">Ориентировочная сумма:</span>
+            <span class="text-xs text-emerald-800 font-semibold block">Итоговая стоимость:</span>
             <div class="flex items-baseline gap-2 mt-0.5">
-              <span id="calcResultTotal" class="text-2xl font-black text-emerald-950">7 560 ₽</span>
-              <span class="text-xs text-stone-500">(ориентир)</span>
+              <span id="calcResultTotal" class="text-2xl font-black text-emerald-950">5 040 ₽</span>
             </div>
             <span id="calcLeadTime" class="text-[11px] text-emerald-800 block mt-1">
               В наличии на складе (отгрузка сегодня)
@@ -734,16 +1048,22 @@
           </div>
 
           <div class="space-y-2 pt-1">
-            <button onclick="orderFromCalculator()" class="w-full py-3 rounded-xl bg-emerald-900 hover:bg-emerald-800 text-white font-bold text-xs shadow-sm transition">
+            <button onclick="orderFromCalculator()" class="w-full py-3 rounded-xl bg-[#15432A] hover:bg-[#0F3B25] text-white font-bold text-xs shadow-sm transition active:scale-[0.99]">
               Оформить заявку на этот расчёт
             </button>
-            <button onclick="sendCalculatorToTelegram()" class="w-full py-2.5 rounded-xl border border-sky-200 hover:border-sky-400 bg-sky-50/50 hover:bg-sky-50 text-sky-900 font-bold text-xs transition flex items-center justify-center gap-2 shadow-xs">
-              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="12" fill="#24A1DE"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 12c3.4-1.5 5.7-2.5 6.9-3 3.3-1.4 4-1.6 4.5-1.6.1 0 .3 0 .4.1.1.1.2.2.2.4 0 .1 0 .3-.1.5-.2 1.9-1 6.5-1.4 8.6-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.5-1.9-.9-1.1-.7-1.7-1.1-2.7-1.8-1.2-.8-.4-1.2.3-1.9.2-.2 3.2-3 3.3-3.2 0 0 0-.1-.1-.2-.1 0-.2 0-.2 0-.1 0-1.8 1.1-5.1 3.3-.5.3-.9.5-1.3.5-.4 0-1.3-.2-1.9-.4-.8-.2-1.3-.4-1.3-.8 0-.2.3-.4.9-.7z" fill="white"/>
-              </svg>
-              <span>Уточнить расчёт в Telegram</span>
-            </button>
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="sendCalculatorToTelegram()" class="py-2.5 px-3 rounded-xl btn-telegram font-bold text-xs transition flex items-center justify-center gap-2 shadow-2xs active:scale-[0.98]">
+                <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="12" fill="#24A1DE"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 12c3.4-1.5 5.7-2.5 6.9-3 3.3-1.4 4-1.6 4.5-1.6.1 0 .3 0 .4.1.1.1.2.2.2.4 0 .1 0 .3-.1.5-.2 1.9-1 6.5-1.4 8.6-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.5-1.9-.9-1.1-.7-1.7-1.1-2.7-1.8-1.2-.8-.4-1.2.3-1.9.2-.2 3.2-3 3.3-3.2 0 0 0-.1-.1-.2-.1 0-.2 0-.2 0-.1 0-1.8 1.1-5.1 3.3-.5.3-.9.5-1.3.5-.4 0-1.3-.2-1.9-.4-.8-.2-1.3-.4-1.3-.8 0-.2.3-.4.9-.7z" fill="white"/>
+                </svg>
+                <span>В Telegram</span>
+              </button>
+              <button onclick="sendCalculatorToMax()" class="py-2.5 px-3 rounded-xl btn-max font-bold text-xs transition flex items-center justify-center gap-2 shadow-2xs active:scale-[0.98]">
+                <img src="assets/images/max_messenger_logo.svg" alt="MAX" class="w-4 h-4 rounded-[3px] shrink-0">
+                <span>В MAX</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -755,7 +1075,7 @@
   <!-- ============================================================ -->
   <!-- ФОРМА: РАССЧИТАЕМ ВАШ ЗАКАЗ (ТОЧНЫЙ ВИЗУАЛ ИЗ МАКЕТА) -->
   <!-- ============================================================ -->
-  <section id="contacts" class="py-14 bg-white">
+  <section id="contacts" class="landing-section bg-white border-t border-stone-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Зеленая карточка формы точь-в-точь как на согласованном макете -->
@@ -784,6 +1104,13 @@
                 <a href="https://t.me/manver_nets" target="_blank" class="hover:underline text-white font-bold text-sm flex items-center gap-1">
                   <span>Telegram: @manver_nets</span>
                   <span class="text-[10px] bg-sky-500/30 text-sky-200 px-1.5 py-0.5 rounded ml-1">Быстрый ответ</span>
+                </a>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <img src="assets/images/max_messenger_logo.svg" alt="MAX" class="w-4 h-4 rounded-[4px] shrink-0">
+                <a href="https://max.ru/u/manver" target="_blank" class="hover:underline text-white font-bold text-sm flex items-center gap-1">
+                  <span>MAX: @manver</span>
+                  <span class="text-[10px] bg-purple-500/30 text-purple-200 px-1.5 py-0.5 rounded ml-1">Чат с фабрикой</span>
                 </a>
               </div>
               <div class="flex items-center gap-2.5">
@@ -860,20 +1187,25 @@
         <nav class="flex flex-wrap items-center gap-5 text-stone-700 font-medium text-xs">
           <a href="#catalog" class="hover:text-emerald-800 transition">Продукция</a>
           <a href="#quality" class="hover:text-emerald-800 transition">Производство</a>
-          <a href="#bases" class="hover:text-emerald-800 transition">Доставка</a>
+          <a href="#sizes" class="hover:text-emerald-800 transition">Размеры</a>
+          <a href="#bases" class="hover:text-emerald-800 transition">Основы</a>
           <a href="#contacts" class="hover:text-emerald-800 transition">Контакты</a>
         </nav>
 
-        <!-- Контакты: Телефон и Telegram -->
-        <div class="flex items-center gap-3">
-          <a href="https://t.me/manver_nets" target="_blank" class="px-3 py-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 text-xs font-bold transition flex items-center gap-1.5">
+        <!-- Контакты: Телефон, Telegram и MAX -->
+        <div class="flex flex-wrap items-center gap-2.5">
+          <a href="https://t.me/manver_nets" target="_blank" class="px-2.5 py-1.5 rounded-lg btn-telegram text-xs font-bold transition flex items-center gap-1.5 shadow-2xs">
             <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="12" cy="12" r="12" fill="#24A1DE"/>
               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 12c3.4-1.5 5.7-2.5 6.9-3 3.3-1.4 4-1.6 4.5-1.6.1 0 .3 0 .4.1.1.1.2.2.2.4 0 .1 0 .3-.1.5-.2 1.9-1 6.5-1.4 8.6-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.5-1.9-.9-1.1-.7-1.7-1.1-2.7-1.8-1.2-.8-.4-1.2.3-1.9.2-.2 3.2-3 3.3-3.2 0 0 0-.1-.1-.2-.1 0-.2 0-.2 0-.1 0-1.8 1.1-5.1 3.3-.5.3-.9.5-1.3.5-.4 0-1.3-.2-1.9-.4-.8-.2-1.3-.4-1.3-.8 0-.2.3-.4.9-.7z" fill="white"/>
             </svg>
             <span>Telegram</span>
           </a>
-          <a href="tel:+74952753095" class="text-sm font-bold text-stone-900 hover:text-emerald-800 transition">
+          <a href="https://max.ru/u/manver" target="_blank" class="px-2.5 py-1.5 rounded-lg btn-max text-xs font-bold transition flex items-center gap-1.5 shadow-2xs">
+            <img src="assets/images/max_messenger_logo.svg" alt="MAX" class="w-4 h-4 rounded-[3px] shrink-0">
+            <span>MAX</span>
+          </a>
+          <a href="tel:+74952753095" class="text-sm font-bold text-stone-900 hover:text-emerald-800 transition whitespace-nowrap pl-1">
             +7 (495) 275-30-95
           </a>
         </div>
@@ -936,9 +1268,29 @@
           <input type="tel" name="phone" required placeholder="+7 (___) ___-__-__" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2.5 text-xs text-stone-900 focus:outline-none focus:border-emerald-800">
         </div>
 
-        <button type="submit" class="w-full py-3 rounded-xl bg-emerald-900 hover:bg-emerald-800 text-white font-bold text-xs shadow transition">
+        <button type="submit" class="w-full py-3 rounded-xl bg-[#15432A] hover:bg-[#0F3B25] text-white font-bold text-xs shadow transition active:scale-[0.99]">
           Отправить заявку
         </button>
+
+        <div class="relative flex py-1 items-center">
+          <div class="flex-grow border-t border-stone-200"></div>
+          <span class="flex-shrink mx-2 text-stone-400 text-[10.5px]">или сразу в мессенджер</span>
+          <div class="flex-grow border-t border-stone-200"></div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <button type="button" onclick="sendModalToTelegram()" class="py-2 px-2.5 rounded-xl btn-telegram font-bold text-xs flex items-center justify-center gap-1.5 shadow-2xs active:scale-[0.98]">
+            <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="12" fill="#24A1DE"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 12c3.4-1.5 5.7-2.5 6.9-3 3.3-1.4 4-1.6 4.5-1.6.1 0 .3 0 .4.1.1.1.2.2.2.4 0 .1 0 .3-.1.5-.2 1.9-1 6.5-1.4 8.6-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.5-1.9-.9-1.1-.7-1.7-1.1-2.7-1.8-1.2-.8-.4-1.2.3-1.9.2-.2 3.2-3 3.3-3.2 0 0 0-.1-.1-.2-.1 0-.2 0-.2 0-.1 0-1.8 1.1-5.1 3.3-.5.3-.9.5-1.3.5-.4 0-1.3-.2-1.9-.4-.8-.2-1.3-.4-1.3-.8 0-.2.3-.4.9-.7z" fill="white"/>
+            </svg>
+            <span>Telegram</span>
+          </button>
+          <button type="button" onclick="sendModalToMax()" class="py-2 px-2.5 rounded-xl btn-max font-bold text-xs flex items-center justify-center gap-1.5 shadow-2xs active:scale-[0.98]">
+            <img src="assets/images/max_messenger_logo.svg" alt="MAX" class="w-3.5 h-3.5 rounded-[3px] shrink-0">
+            <span>MAX</span>
+          </button>
+        </div>
       </form>
     </div>
   </div>
@@ -965,9 +1317,29 @@
           <label class="block text-xs font-bold text-stone-700 mb-1">Телефон <span class="text-red-500">*</span></label>
           <input type="tel" name="phone" required placeholder="+7 (___) ___-__-__" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-xs text-stone-900 focus:outline-none focus:border-emerald-800">
         </div>
-        <button type="submit" class="w-full py-2.5 rounded-xl bg-emerald-900 hover:bg-emerald-800 text-white font-bold text-xs transition">
+        <button type="submit" class="w-full py-2.5 rounded-xl bg-[#15432A] hover:bg-[#0F3B25] text-white font-bold text-xs transition active:scale-[0.99]">
           Жду звонка
         </button>
+
+        <div class="relative flex py-1 items-center">
+          <div class="flex-grow border-t border-stone-200"></div>
+          <span class="flex-shrink mx-2 text-stone-400 text-[10.5px]">или напишите нам</span>
+          <div class="flex-grow border-t border-stone-200"></div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <a href="https://t.me/manver_nets" target="_blank" class="py-2 px-2 rounded-xl btn-telegram font-bold text-xs flex items-center justify-center gap-1.5 shadow-2xs">
+            <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="12" fill="#24A1DE"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 12c3.4-1.5 5.7-2.5 6.9-3 3.3-1.4 4-1.6 4.5-1.6.1 0 .3 0 .4.1.1.1.2.2.2.4 0 .1 0 .3-.1.5-.2 1.9-1 6.5-1.4 8.6-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.5-1.9-.9-1.1-.7-1.7-1.1-2.7-1.8-1.2-.8-.4-1.2.3-1.9.2-.2 3.2-3 3.3-3.2 0 0 0-.1-.1-.2-.1 0-.2 0-.2 0-.1 0-1.8 1.1-5.1 3.3-.5.3-.9.5-1.3.5-.4 0-1.3-.2-1.9-.4-.8-.2-1.3-.4-1.3-.8 0-.2.3-.4.9-.7z" fill="white"/>
+            </svg>
+            <span>Telegram</span>
+          </a>
+          <a href="https://max.ru/u/manver" target="_blank" class="py-2 px-2 rounded-xl btn-max font-bold text-xs flex items-center justify-center gap-1.5 shadow-2xs">
+            <img src="assets/images/max_messenger_logo.svg" alt="MAX" class="w-3.5 h-3.5 rounded-[3px] shrink-0">
+            <span>MAX</span>
+          </a>
+        </div>
       </form>
     </div>
   </div>

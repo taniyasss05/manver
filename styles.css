@@ -16,9 +16,8 @@ body {
   max-width: 100%;
 }
 
-/* Плавный скролл по якорям */
+/* Отключение автоматической анимации скролла на уровне html, чтобы избежать бага с автопрокруткой на смартфонах при загрузке */
 html {
-  scroll-behavior: smooth;
   overflow-x: hidden;
   max-width: 100%;
 }
@@ -171,14 +170,13 @@ input[type=range] {
   }
 }
 
-/* Первый экран (Hero Section) — симметричный баннер в сетке сайта (по референсу) */
+/* Первый экран (Hero Section) — карточка-баннер в сетке сайта */
 .hero-banner-card {
   position: relative;
   overflow: hidden;
   background-color: #ffffff;
-  border: 1px solid rgba(231, 229, 228, 0.9);
-  border-radius: 16px;
-  min-height: 520px;
+  border: 1px solid rgba(231, 229, 228, 0.95);
+  border-radius: 24px;
   display: flex;
   align-items: center;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03);
@@ -218,13 +216,13 @@ input[type=range] {
   position: relative;
   z-index: 10;
   width: 52%;
+  padding: 28px 48px;
 }
 
 @media (max-width: 1023px) {
   .hero-banner-card {
     flex-direction: column;
     align-items: stretch;
-    min-height: auto;
     border-radius: 16px;
   }
   .hero-image-wrap {
@@ -252,7 +250,7 @@ input[type=range] {
   }
   .hero-text-wrap {
     width: 100%;
-    padding: 20px 20px 36px;
+    padding: 20px 20px 32px !important;
     order: 2;
   }
 }
@@ -278,9 +276,534 @@ input[type=range] {
   }
 }
 
+/* Выравнивание и одинаковый размер плашек характеристик на макро-фотографиях */
+.macro-overlay-card {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .macro-overlay-card {
+    min-height: 76px;
+  }
+}
+
+/* Премиальная зеленая иконка в плашке ручного вплетения */
+.quality-craft-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #1e633d 0%, #15432a 60%, #0d2c1c 100%);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  box-shadow: 0 4px 10px rgba(21, 67, 42, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #6ee7b7;
+}
+
+@media (min-width: 640px) {
+  .quality-craft-icon {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.875rem;
+  }
+}
+
+/* Карточки товаров в каталоге */
+.product-card {
+  transition: all 0.25s ease-in-out;
+}
+.product-card:hover {
+  transform: translateY(-2px);
+}
+.product-card-img-wrap {
+  height: 235px;
+}
+@media (min-width: 640px) {
+  .product-card-img-wrap {
+    height: 245px;
+  }
+}
+
 /* Дополнительные размерные утилиты */
 .w-8 { width: 2rem !important; }
 .h-8 { height: 2rem !important; }
 .w-7 { width: 1.75rem !important; }
 .h-7 { height: 1.75rem !important; }
+
+/* Гармоничные и аккуратные вертикальные отступы между смысловыми блоками сайта */
+.landing-section {
+  padding-top: 36px !important;
+  padding-bottom: 36px !important;
+}
+
+@media (min-width: 1024px) {
+  .landing-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .landing-section {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+}
+
+/* ============================================================ */
+/* БЛОК 24 ТИПОРАЗМЕРОВ И ЭКСПРЕСС-ОТГРУЗКИ 24 ЧАСА */
+/* ============================================================ */
+
+/* Сетка колонок */
+.sizes-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .sizes-grid-layout {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sizes-grid-layout {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.875rem;
+  }
+}
+
+/* Обычные карточки типоразмеров */
+.size-column-card {
+  background-color: #ffffff;
+  border: 1px solid #e7e5e4;
+  border-radius: 1rem;
+  padding: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+.size-column-card:hover {
+  border-color: #15432a;
+  box-shadow: 0 4px 14px rgba(21, 67, 42, 0.1);
+}
+.size-column-card .col-header {
+  border-bottom: 1px solid #e7e5e4;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.625rem;
+}
+.size-column-card .col-title {
+  color: #0f2e1b;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+/* Обычные кнопки типоразмеров */
+.size-pill-btn {
+  background-color: #fbfbfa;
+  border: 1px solid #e7e5e4;
+  color: #1c1917;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+.size-pill-btn:hover {
+  background-color: #15432A !important;
+  border-color: #15432A !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(21, 67, 42, 0.22);
+}
+.size-pill-btn:hover .size-pill-name {
+  color: #ffffff !important;
+}
+.size-pill-btn:hover .size-pill-area {
+  background-color: rgba(255, 255, 255, 0.22) !important;
+  color: #ffffff !important;
+}
+.size-pill-name {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #1c1917;
+  transition: color 0.18s ease;
+}
+.size-pill-area {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.375rem;
+  background-color: #f0eeeb;
+  color: #57534e;
+  transition: all 0.18s ease;
+}
+
+/* Колонка 6: Крупные размеры (темный премиум изумруд) */
+.column-large-sizes {
+  background: linear-gradient(180deg, #0e301d 0%, #15432a 100%) !important;
+  border: 1px solid #1a5634 !important;
+  border-radius: 1rem;
+  padding: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 14px rgba(14, 48, 29, 0.25);
+  color: #ffffff !important;
+}
+.column-large-sizes .col-large-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.625rem;
+}
+.column-large-sizes .col-large-title {
+  color: #ffffff !important;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.column-large-sizes .large-size-btn {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.column-large-sizes .large-size-btn:hover {
+  background-color: #ffffff !important;
+  color: #0e301d !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+.column-large-sizes .large-size-btn:hover .size-pill-name {
+  color: #0e301d !important;
+}
+.column-large-sizes .large-size-btn:hover .size-pill-area {
+  background-color: #d1fae5 !important;
+  color: #064e3b !important;
+}
+.column-large-sizes .large-size-btn .size-pill-name {
+  color: #ffffff !important;
+}
+.column-large-sizes .large-size-btn .size-pill-area {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+.column-large-sizes .col-large-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  font-size: 0.6875rem;
+  color: #a7f3d0;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Премиальный баннер «Отгрузка за 24 часа» */
+.banner-24h {
+  background: linear-gradient(135deg, #092415 0%, #15432a 50%, #061c10 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid #1f6b40 !important;
+  border-radius: 1.5rem;
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -15px rgba(9, 36, 21, 0.5);
+  margin-top: 2rem;
+}
+@media (min-width: 640px) {
+  .banner-24h {
+    padding: 2.25rem 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .banner-24h {
+    padding: 2.5rem;
+  }
+  .banner-24h-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 2.5rem !important;
+  }
+  .banner-24h-col-text {
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+  }
+  .banner-24h-col-media {
+    width: 320px !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+.banner-24h-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  background-color: rgba(16, 185, 129, 0.22);
+  border: 1px solid rgba(52, 211, 153, 0.45);
+  color: #a7f3d0;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.875rem;
+}
+.banner-pulse-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: #34d399;
+  box-shadow: 0 0 8px #34d399;
+}
+.banner-24h-title {
+  color: #ffffff !important;
+  font-size: 1.35rem;
+  line-height: 1.25;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem 0;
+}
+@media (min-width: 640px) {
+  .banner-24h-title {
+    font-size: 1.65rem;
+  }
+}
+@media (min-width: 1024px) {
+  .banner-24h-title {
+    font-size: 1.85rem;
+  }
+}
+.banner-24h-desc {
+  color: #e2e8f0 !important;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0 0 1.25rem 0;
+  max-width: 42rem;
+}
+@media (min-width: 640px) {
+  .banner-24h-desc {
+    font-size: 0.95rem;
+  }
+}
+.banner-24h-desc strong {
+  color: #ffffff;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-color: #34d399;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* 3 плашки преимуществ */
+.banner-perks-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.875rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 640px) {
+  .banner-perks-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+.banner-perk-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.banner-perk-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.625rem;
+  background-color: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: #6ee7b7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.banner-perk-title {
+  color: #ffffff !important;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.banner-perk-sub {
+  color: #cbd5e1 !important;
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  margin-top: 0.25rem;
+}
+
+/* Кнопки баннера */
+.banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+.banner-btn-calc {
+  background-color: #ffffff !important;
+  color: #15432a !important;
+  font-weight: 800;
+  font-size: 0.8125rem;
+  padding: 0.8rem 1.35rem;
+  border-radius: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.18s ease;
+  text-decoration: none;
+}
+.banner-btn-calc:hover {
+  background-color: #ecfdf5 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+.banner-btn-order {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  padding: 0.8rem 1.25rem;
+  border-radius: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.18s ease;
+  text-decoration: none;
+}
+.banner-btn-order:hover {
+  background-color: rgba(255, 255, 255, 0.22) !important;
+  color: #ffffff !important;
+}
+
+/* Фотокарточка в баннере */
+.banner-photo-card {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 2px solid rgba(52, 211, 153, 0.35);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.banner-photo-img {
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.5s ease;
+}
+@media (min-width: 640px) {
+  .banner-photo-img {
+    height: 16rem;
+  }
+}
+.banner-photo-card:hover .banner-photo-img {
+  transform: scale(1.04);
+}
+.banner-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6, 28, 16, 0.1) 0%, rgba(6, 28, 16, 0.85) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+.banner-photo-badge {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6ee7b7;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-bottom: 0.25rem;
+}
+.banner-photo-title {
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+}
+
+/* Кнопки и бейджи мессенджеров MAX и Telegram */
+.btn-telegram {
+  background-color: #F0F9FF !important;
+  border: 1px solid #BAE6FD !important;
+  color: #0369A1 !important;
+  transition: all 0.2s ease !important;
+}
+.btn-telegram:hover {
+  background-color: #E0F2FE !important;
+  border-color: #7DD3FC !important;
+  color: #075985 !important;
+}
+
+.btn-max {
+  background-color: #FAF5FF !important;
+  border: 1px solid #E9D5FF !important;
+  color: #4C1D95 !important;
+  transition: all 0.2s ease !important;
+}
+.btn-max:hover {
+  background-color: #F3E8FF !important;
+  border-color: #D8B4FE !important;
+  color: #3B0764 !important;
+}
+
+.badge-max {
+  background-color: rgba(147, 51, 234, 0.12) !important;
+  color: #6B21A8 !important;
+  border: 1px solid rgba(147, 51, 234, 0.25) !important;
+}
+
+.badge-max-dark {
+  background-color: rgba(168, 85, 247, 0.22) !important;
+  color: #F3E8FF !important;
+  border: 1px solid rgba(168, 85, 247, 0.35) !important;
+}
 
