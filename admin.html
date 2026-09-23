@@ -257,6 +257,18 @@
             </div>
 
             <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Ссылка на мессенджер MAX</label>
+              <input type="text" id="contentMax" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-xs font-semibold focus:outline-none focus:border-emerald-800">
+              <p class="text-[11px] text-stone-400 mt-1">Пример: https://max.ru/u/manver</p>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Отображаемый юзернейм MAX</label>
+              <input type="text" id="contentMaxHandle" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-xs font-semibold focus:outline-none focus:border-emerald-800">
+              <p class="text-[11px] text-stone-400 mt-1">Пример: @manver</p>
+            </div>
+
+            <div>
               <label class="block text-xs font-bold text-stone-700 mb-1">Электронная почта (Email)</label>
               <input type="email" id="contentEmail" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-xs font-semibold focus:outline-none focus:border-emerald-800">
             </div>
@@ -306,20 +318,16 @@
               
               <div class="space-y-2 text-xs">
                 <div class="flex items-center justify-between p-2.5 bg-stone-50 rounded-xl border border-stone-100">
-                  <span class="font-bold text-stone-700">От 50 м² до 99 м²</span>
+                  <span class="font-bold text-stone-700">До 90 м²</span>
+                  <span class="font-bold text-stone-700">Базовая цена (280 ₽/м²)</span>
+                </div>
+                <div class="flex items-center justify-between p-2.5 bg-stone-50 rounded-xl border border-stone-100">
+                  <span class="font-bold text-stone-700">От 90 м² до 179 м²</span>
                   <span class="font-bold text-emerald-800">Скидка 5%</span>
                 </div>
                 <div class="flex items-center justify-between p-2.5 bg-stone-50 rounded-xl border border-stone-100">
-                  <span class="font-bold text-stone-700">От 100 м² до 299 м²</span>
+                  <span class="font-bold text-stone-700">От 180 м² и выше</span>
                   <span class="font-bold text-emerald-800">Скидка 10%</span>
-                </div>
-                <div class="flex items-center justify-between p-2.5 bg-stone-50 rounded-xl border border-stone-100">
-                  <span class="font-bold text-stone-700">От 300 м² до 499 м²</span>
-                  <span class="font-bold text-emerald-800">Скидка 15%</span>
-                </div>
-                <div class="flex items-center justify-between p-2.5 bg-stone-50 rounded-xl border border-stone-100">
-                  <span class="font-bold text-stone-700">От 500 м² и выше</span>
-                  <span class="font-bold text-emerald-800">Скидка 20% (Крупный опт)</span>
                 </div>
               </div>
             </div>
@@ -889,6 +897,8 @@
       document.getElementById('contentPhoneRaw').value = c.phoneRaw || '+74952753095';
       document.getElementById('contentTelegram').value = c.telegram || 'https://t.me/manver_nets';
       document.getElementById('contentTelegramHandle').value = c.telegramHandle || '@manver_nets';
+      document.getElementById('contentMax').value = c.max || 'https://max.ru/u/manver';
+      document.getElementById('contentMaxHandle').value = c.maxHandle || '@manver';
       document.getElementById('contentEmail').value = c.email || 'sale@manver.ru';
       document.getElementById('contentWorkingHours').value = c.workingHours || 'Пн-Пт: 8:00 - 19:00 (МСК)';
       document.getElementById('contentAddress').value = c.address || 'Московская область, г. Щелково, Заводская ул., д. 2';
@@ -906,6 +916,8 @@
           phoneRaw: document.getElementById('contentPhoneRaw').value.trim(),
           telegram: document.getElementById('contentTelegram').value.trim(),
           telegramHandle: document.getElementById('contentTelegramHandle').value.trim(),
+          max: document.getElementById('contentMax').value.trim(),
+          maxHandle: document.getElementById('contentMaxHandle').value.trim(),
           email: document.getElementById('contentEmail').value.trim(),
           workingHours: document.getElementById('contentWorkingHours').value.trim(),
           address: document.getElementById('contentAddress').value.trim()
