@@ -207,6 +207,8 @@ function initCalculator() {
   });
 
   typeSelect.addEventListener('change', calculateTotal);
+  const colorSelect = document.getElementById('calcColor');
+  if (colorSelect) colorSelect.addEventListener('change', calculateTotal);
   if (eyeletsCheck) eyeletsCheck.addEventListener('change', calculateTotal);
 
   // Первоначальный расчет
@@ -274,7 +276,60 @@ function calculateTotal() {
       leadTimeEl.innerText = 'Изготовление под заказ: 1–2 рабочих дня';
     }
   }
+
+  // Управление расцветкой в калькуляторе
+  const isBase = typeKey.startsWith('base_');
+  const colorWrapper = document.getElementById('calcColorWrapper');
+  const colorSelect = document.getElementById('calcColor');
+  const colorBadge = document.getElementById('calcColorBadge');
+  const selectedColorText = document.getElementById('calcSelectedColorText');
+  const colorSummaryRow = document.getElementById('calcColorSummaryRow');
+
+  if (colorWrapper) {
+    if (isBase) {
+      colorWrapper.classList.add('opacity-40', 'pointer-events-none');
+      if (colorBadge) colorBadge.innerText = 'Не требуется';
+      if (selectedColorText) selectedColorText.innerText = 'Основа (без маскировки)';
+    } else {
+      colorWrapper.classList.remove('opacity-40', 'pointer-events-none');
+      const currentColor = colorSelect ? colorSelect.value : 'Бор';
+      if (colorBadge) colorBadge.innerText = currentColor;
+      if (selectedColorText) selectedColorText.innerText = currentColor;
+    }
+  }
 }
+
+// Выбор цвета из витрины расцветок
+window.selectColor = function(colorName) {
+  const typeSelect = document.getElementById('calcType');
+  const colorSelect = document.getElementById('calcColor');
+  if (typeSelect && typeSelect.value.startsWith('base_')) {
+    typeSelect.value = 'standard_net';
+  }
+  if (colorSelect) {
+    let matched = false;
+    for (let opt of colorSelect.options) {
+      if (opt.value === colorName || opt.value.endsWith(colorName) || colorName.endsWith(opt.value)) {
+        colorSelect.value = opt.value;
+        matched = true;
+        break;
+      }
+    }
+    if (!matched) colorSelect.value = colorName;
+  }
+  calculateTotal();
+  const calcSection = document.getElementById('calculator');
+  if (calcSection) {
+    calcSection.scrollIntoView({ behavior: 'smooth' });
+    const colorWrapper = document.getElementById('calcColorWrapper');
+    if (colorWrapper) {
+      colorWrapper.classList.add('ring-2', 'ring-emerald-700', 'rounded-2xl', 'p-1', 'transition-all');
+      setTimeout(() => {
+        colorWrapper.classList.remove('ring-2', 'ring-emerald-700', 'p-1');
+      }, 1500);
+    }
+  }
+};
 
 // Выбор размера из блока «Прочная основа»
 window.selectCalcSize = function(width, length) {
@@ -305,8 +360,11 @@ window.orderFromCalculator = function() {
   const total = document.getElementById('calcResultTotal')?.innerText;
   const typeSelect = document.getElementById('calcType');
   const typeName = typeSelect ? typeSelect.options[typeSelect.selectedIndex].text : 'Маскировочная сеть';
+  const colorSelect = document.getElementById('calcColor');
+  const isBase = typeSelect && typeSelect.value.startsWith('base_');
+  const colorText = (!isBase && colorSelect) ? `Цвет: ${colorSelect.value}, ` : '';
 
-  const orderTitle = `${typeName} (Размер: ${width}×${length} м, ${area})`;
+  const orderTitle = `${typeName} (${colorText}Размер: ${width}×${length} м, ${area})`;
   openOrderModal(encodeURIComponent(orderTitle), total);
 };
 
@@ -319,8 +377,11 @@ window.sendCalculatorToTelegram = function() {
   const discountBadge = document.getElementById('calcDiscountBadge')?.innerText || '';
   const typeSelect = document.getElementById('calcType');
   const typeName = typeSelect ? typeSelect.options[typeSelect.selectedIndex].text : 'Маскировочная сеть';
+  const colorSelect = document.getElementById('calcColor');
+  const isBase = typeSelect && typeSelect.value.startsWith('base_');
+  const colorLine = (!isBase && colorSelect) ? `\n• Расцветка: ${colorSelect.value}` : '';
 
-  const text = `Здравствуйте! Хочу заказать в MANVER:\n• Позиция: ${typeName}\n• Размеры: ${width} × ${length} м (${area})\n• Предварительный расчет калькулятора: ${total}${discountBadge ? ' (' + discountBadge + ')' : ''}\nПодскажите по наличию и срокам доставки.`;
+  const text = `Здравствуйте! Хочу заказать в MANVER:\n• Позиция: ${typeName}${colorLine}\n• Размеры: ${width} × ${length} м (${area})\n• Предварительный расчет калькулятора: ${total}${discountBadge ? ' (' + discountBadge + ')' : ''}\nПодскажите по наличию и срокам доставки.`;
   const url = `https://t.me/share/url?url=${encodeURIComponent('https://t.me/manver_nets')}&text=${encodeURIComponent(text)}`;
   window.open(url, '_blank');
 };
@@ -335,8 +396,11 @@ window.sendCalculatorToMax = function() {
   const discountBadge = document.getElementById('calcDiscountBadge')?.innerText || '';
   const typeSelect = document.getElementById('calcType');
   const typeName = typeSelect ? typeSelect.options[typeSelect.selectedIndex].text : 'Маскировочная сеть';
+  const colorSelect = document.getElementById('calcColor');
+  const isBase = typeSelect && typeSelect.value.startsWith('base_');
+  const colorLine = (!isBase && colorSelect) ? `\n• Расцветка: ${colorSelect.value}` : '';
 
-  const text = `Здравствуйте! Хочу заказать в MANVER:\n• Позиция: ${typeName}\n• Размеры: ${width} × ${length} м (${area})\n• Расчет калькулятора: ${total}${discountBadge ? ' (' + discountBadge + ')' : ''}\nПодскажите наличие и сроки.`;
+  const text = `Здравствуйте! Хочу заказать в MANVER:\n• Позиция: ${typeName}${colorLine}\n• Размеры: ${width} × ${length} м (${area})\n• Расчет калькулятора: ${total}${discountBadge ? ' (' + discountBadge + ')' : ''}\nПодскажите наличие и сроки.`;
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).catch(() => {});
   }

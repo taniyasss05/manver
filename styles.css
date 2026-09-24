@@ -838,3 +838,96 @@ input[type=range] {
   border: 1px solid rgba(168, 85, 247, 0.35) !important;
 }
 
+/* ============================================================ */
+/* Блок расцветок (Витрина 11 цветов) */
+/* ============================================================ */
+.camo-color-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background-color: #ffffff;
+  border: 1px solid rgba(231, 229, 228, 0.9);
+  border-radius: 16px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.camo-color-card:hover {
+  border-color: #047857;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -5px rgba(21, 67, 42, 0.12);
+}
+
+.camo-color-card:active {
+  transform: scale(0.99);
+}
+
+.camo-thumb-img {
+  width: 84px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: contain;
+  background-color: #A7A7A7;
+  border: 1px solid rgba(214, 211, 209, 0.7);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.camo-color-card:hover .camo-thumb-img {
+  transform: scale(1.05);
+}
+
+.camo-thumb-img-sm {
+  width: 70px;
+  height: 50px;
+  border-radius: 10px;
+  object-fit: contain;
+  background-color: #A7A7A7;
+  border: 1px solid rgba(214, 211, 209, 0.7);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.camo-color-card:hover .camo-thumb-img-sm {
+  transform: scale(1.05);
+}
+
+.camo-arrow-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #F5F5F4;
+  color: #A8A29E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.camo-color-card:hover .camo-arrow-btn {
+  background-color: #047857;
+  color: #ffffff;
+}
+
+@media (min-width: 640px) {
+  .camo-color-card {
+    padding: 14px 16px;
+    border-radius: 18px;
+  }
+  .camo-thumb-img {
+    width: 96px;
+    height: 68px;
+  }
+  .camo-thumb-img-sm {
+    width: 76px;
+    height: 54px;
+  }
+}
+
+
